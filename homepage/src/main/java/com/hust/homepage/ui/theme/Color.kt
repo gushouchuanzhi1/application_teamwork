@@ -1,4 +1,4 @@
-package com.hust.mychat.ui.theme
+package com.hust.homepage.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

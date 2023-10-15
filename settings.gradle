@@ -15,5 +15,6 @@ dependencyResolutionManagement {
 rootProject.name = "MyChat"
 include ':app'
 include ':lar'
-include ':base:resbase'
 include ':base:resBase'
+include ':base:dataBase'
+include ':homepage'

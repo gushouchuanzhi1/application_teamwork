@@ -2,4 +2,10 @@
 <resources>
 
     <style name="Theme.MyChat" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Start" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/Start_Background</item>
+        <item name="colorPrimaryDark">@color/Start_Background</item>
+        <item name="colorAccent">@color/Start_Background</item>
+    </style>
 </resources>

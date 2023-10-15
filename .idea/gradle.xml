@@ -12,8 +12,9 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/base/dataBase" />
             <option value="$PROJECT_DIR$/base/resBase" />
-            <option value="$PROJECT_DIR$/base/resbase" />
+            <option value="$PROJECT_DIR$/homepage" />
             <option value="$PROJECT_DIR$/lar" />
           </set>
         </option>
