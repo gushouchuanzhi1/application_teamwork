@@ -1,6 +1,7 @@
 <resources>
     <string name="title_activity_home_page">HomePageActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_mychat">微信</string>
+    <string name="title_address_book">通讯录</string>
+    <string name="title_find">发现</string>
+    <string name="title_mine">我</string>
 </resources>

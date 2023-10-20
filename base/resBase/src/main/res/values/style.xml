@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="HustTypography.Headline1" parent="TextAppearance.AppCompat.Headline">
+        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textColor">@color/OnSurface</item>
+        <item name="android:textFontWeight">700</item>
+    </style>
+
+    <style name="HustTypography.Headline1.Bold" parent="HustTypography.Headline1">
+        <item name="fontFamily">@font/noto_sans_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_bold</item>
+    </style>
+
+    <style name="HustTypography.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textColor">@color/OnSurface</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+    </style>
+
+    <style name="HustTypography.Headline2.Bold" parent="HustTypography.Headline2">
+        <item name="fontFamily">@font/noto_sans_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_bold</item>
+    </style>
+
+    <style name="HustTypography.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textColor">@color/OnSurface</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+    </style>
+
+    <style name="HustTypography.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/sp_11</item>
+        <item name="android:textColor">@color/OnSurface</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+    </style>
+
+    <style name="HustTypography.Headline4.Bold" parent="HustTypography.Headline4">
+        <item name="fontFamily">@font/noto_sans_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_bold</item>
+    </style>
+
+    <style name="HustTypography.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/noto_sans_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_bold</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textColor">@color/OnSurface</item>
+        <item name="android:lineSpacingExtra">-6sp</item>
+    </style>
+
+    <style name="HustTypography.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/noto_sans_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_bold</item>
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textColor">@color/OnSurface</item>
+        <item name="android:lineSpacingExtra">-8sp</item>
+    </style>
+
+    <style name="HustTypography.Headline7" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/noto_sans_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_bold</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textColor">@color/OnSurface</item>
+        <item name="android:lineSpacingExtra">-8sp</item>
+    </style>
+
+    <style name="HustTypography.Button1" parent="TextAppearance.AppCompat.Button">
+        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textColor">@color/OnSurface</item>
+        <item name="android:lineSpacingExtra">-8sp</item>
+    </style>
+
+    <style name="HustTypography.Button2" parent="TextAppearance.AppCompat.Button">
+        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textColor">@color/OnSurface</item>
+        <item name="android:lineSpacingExtra">-7sp</item>
+    </style>
+
+    <style name="HustTypography.Button3" parent="TextAppearance.AppCompat.Button">
+        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/sp_11</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:lineSpacingExtra">-5sp</item>
+    </style>
+
+    <style name="HustTypography.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:lineSpacingExtra">-9sp</item>
+    </style>
+
+    <style name="HustTypography.Body2" parent="TextAppearance.AppCompat.Body2">
+        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/OnSurface</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+    </style>
+
+    <style name="HustTypography.Body2.Bold" parent="HustTypography.Body2">
+        <item name="fontFamily">@font/noto_sans_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_bold</item>
+    </style>
+
+    <style name="HustTypography.Body3" parent="HustTypography.Body2">
+        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+    </style>
+
+    <style name="HustTypography.Body4" parent="HustTypography.Body2">
+        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/sp_10</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:lineSpacingExtra">-5sp</item>
+    </style>
+
+    <style name="HustTypography.Body4.Bold" parent="HustTypography.Body4">
+        <item name="fontFamily">@font/noto_sans_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_bold</item>
+    </style>
+
+    <style name="HustTypography.Body5" parent="HustTypography.Body2">
+        <item name="fontFamily">@font/noto_sans_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_bold</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+    </style>
+
+    <style name="HustTypography.Body6" parent="HustTypography.Body2">
+        <item name="fontFamily">@font/noto_sans_bold</item>
+        <item name="android:fontFamily">@font/noto_sans_bold</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+    </style>
+</resources>

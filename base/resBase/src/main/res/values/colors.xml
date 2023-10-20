@@ -30,4 +30,8 @@
     <color name="OnSurface">@color/GrayScale_20</color>
 
     <color name="Start_Background">#FEFEFE</color>
+    <color name="HomePage_Background">@color/Background</color>
+    <color name="HomePage_Surface">@color/Surface</color>
+
+    <color name="Mychat_Green">#FF95ec69</color>
 </resources>

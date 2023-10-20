@@ -10,9 +10,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.hust.database.MMKVUtil
 import com.hust.homepage.HomePageActivity
 import com.hust.lar.components.Main
 import com.hust.lar.ui.theme.MyChatTheme
+import com.hust.resbase.Constant
 
 class LARActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +27,8 @@ class LARActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     Main() {
+                        val mmkv = MMKVUtil.getMMKV(this)
+                        mmkv.put(Constant.IS_LOGIN, true)
                         val intent = Intent(this, HomePageActivity::class.java)
                         startActivity(intent)
                         finish()

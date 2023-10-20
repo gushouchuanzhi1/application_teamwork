@@ -7,10 +7,10 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-    <style name="Theme.HomePage" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+    <style name="Theme.HomePage" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/Start_Background</item>
-        <item name="colorPrimaryDark">@color/Start_Background</item>
-        <item name="colorAccent">@color/Start_Background</item>
+        <item name="colorPrimary">@color/HomePage_Background</item>
+        <item name="colorPrimaryDark">@color/HomePage_Background</item>
+        <item name="colorAccent">@color/HomePage_Background</item>
     </style>
 </resources>

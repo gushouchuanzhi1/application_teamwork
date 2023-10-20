@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults.textFieldColors
@@ -156,6 +157,7 @@ fun LoginIn(navController: NavHostController = rememberNavController(), jump: ()
             }),
             shape = RoundedCornerShape(20.dp),
             colors = textFieldColors(
+                textColor = Color.Black,
                 containerColor = if (isSystemInDarkTheme()) Color.White else Color.Transparent,
                 cursorColor = Color.Black,
                 focusedIndicatorColor = if (isSystemInDarkTheme()) Color.Transparent else Color.Gray,
@@ -230,6 +232,7 @@ fun LoginIn(navController: NavHostController = rememberNavController(), jump: ()
             visualTransformation = PasswordVisualTransformation('.'),
             shape = RoundedCornerShape(20.dp),
             colors = textFieldColors(
+                textColor = Color.Black,
                 containerColor = if (isSystemInDarkTheme()) Color.White else Color.Transparent,
                 cursorColor = Color.Black,
                 focusedIndicatorColor = if (isSystemInDarkTheme()) Color.Transparent else Color.Gray,

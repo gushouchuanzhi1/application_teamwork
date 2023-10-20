@@ -5,8 +5,10 @@
         <activity
             android:name=".HomePageActivity"
             android:exported="false"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_home_page"
-            android:theme="@style/Theme.HomePage" />
+            android:theme="@style/Theme.HomePage"/>
     </application>
 
 </manifest>

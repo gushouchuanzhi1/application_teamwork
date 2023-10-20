@@ -8,18 +8,24 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.hust.homepage.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_mychat"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.hust.homepage.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_address_book"
+        android:name="com.hust.homepage.ui.addressBook.AddressBookFragment"
+        android:label="@string/title_address_book"
+        tools:layout="@layout/fragment_address_book" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.hust.homepage.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_find"
+        android:name="com.hust.homepage.ui.find.FindFragment"
+        android:label="@string/title_find"
+        tools:layout="@layout/fragment_find" />
+
+    <fragment
+        android:id="@+id/navigation_mine"
+        android:name="com.hust.homepage.ui.mine.MineFragment"
+        android:label="@string/title_mine"
+        tools:layout="@layout/fragment_mine" />
 </navigation>

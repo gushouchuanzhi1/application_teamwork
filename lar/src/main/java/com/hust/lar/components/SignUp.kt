@@ -156,6 +156,7 @@ fun SignUp(navController: NavHostController) {
             ),
             shape = RoundedCornerShape(20.dp),
             colors = TextFieldDefaults.textFieldColors(
+                textColor = Color.Black,
                 containerColor = if (isSystemInDarkTheme()) Color.White else Color.Transparent,
                 cursorColor = Color.Black,
                 focusedIndicatorColor = if (isSystemInDarkTheme()) Color.Transparent else Color.Gray,
@@ -215,6 +216,7 @@ fun SignUp(navController: NavHostController) {
             visualTransformation = PasswordVisualTransformation('.'),
             shape = RoundedCornerShape(20.dp),
             colors = TextFieldDefaults.textFieldColors(
+                textColor = Color.Black,
                 containerColor = if (isSystemInDarkTheme()) Color.White else Color.Transparent,
                 cursorColor = Color.Black,
                 focusedIndicatorColor = if (isSystemInDarkTheme()) Color.Transparent else Color.Gray,
@@ -285,6 +287,7 @@ fun SignUp(navController: NavHostController) {
             visualTransformation = PasswordVisualTransformation('.'),
             shape = RoundedCornerShape(20.dp),
             colors = TextFieldDefaults.textFieldColors(
+                textColor = Color.Black,
                 containerColor = if (isSystemInDarkTheme()) Color.White else Color.Transparent,
                 cursorColor = Color.Black,
                 focusedIndicatorColor = if (isSystemInDarkTheme()) Color.Transparent else Color.Gray,

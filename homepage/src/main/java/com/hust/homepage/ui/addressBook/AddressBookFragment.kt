@@ -1,4 +1,4 @@
-package com.hust.homepage.ui.dashboard
+package com.hust.homepage.ui.addressBook
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.hust.homepage.databinding.FragmentDashboardBinding
+import com.hust.homepage.databinding.FragmentAddressBookBinding
 
-class DashboardFragment : Fragment() {
+class AddressBookFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentAddressBookBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val addressBookFragmentViewModel =
+            ViewModelProvider(this).get(AddressBookFragmentViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentAddressBookBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        addressBookFragmentViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

@@ -1,0 +1,6 @@
+<vector android:height="@dimen/dp_24" android:viewportHeight="1024"
+    android:viewportWidth="1024" android:width="@dimen/dp_24" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@drawable/ic_bottom_selector" android:pathData="M139,877.7c-14.6,0 -21.9,0 -36.6,-14.6 -29.3,-21.9 -21.9,-73.1 -7.3,-131.7 7.3,-14.6 14.6,-43.9 14.6,-58.5 -43.9,-65.8 -73.1,-139 -73.1,-212.1C36.6,248.7 248.7,73.1 512,73.1s475.4,175.5 475.4,395 -212.1,395 -475.4,395c-73.1,0 -146.3,-14.6 -219.4,-43.9 -7.3,0 -43.9,14.6 -65.8,29.3 -29.3,14.6 -58.5,29.3 -87.8,29.3zM512,146.3C292.6,146.3 109.7,292.6 109.7,468.1c0,58.5 21.9,117 58.5,168.2 21.9,29.3 7.3,65.8 0,117 0,14.6 -7.3,29.3 -7.3,43.9l43.9,-21.9c51.2,-21.9 87.8,-43.9 124.3,-29.3 58.5,21.9 124.3,36.6 190.2,36.6 219.4,0 402.3,-146.3 402.3,-321.8S731.4,146.3 512,146.3z"/>
+    <path android:fillColor="@drawable/ic_bottom_selector" android:pathData="M643.7,416.9m-36.6,0a36.6,36.6 0,1 0,73.1 0,36.6 36.6,0 1,0 -73.1,0Z"/>
+    <path android:fillColor="@drawable/ic_bottom_selector" android:pathData="M380.3,416.9m-36.6,0a36.6,36.6 0,1 0,73.1 0,36.6 36.6,0 1,0 -73.1,0Z"/>
+</vector>

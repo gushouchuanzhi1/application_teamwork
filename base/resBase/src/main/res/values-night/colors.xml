@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="Start_Background">@color/BlackScale_1</color>
+    <color name="HomePage_Background">@color/GrayScale_0</color>
+    <color name="HomePage_Surface">@color/GrayScale_20</color>
 </resources>
