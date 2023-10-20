@@ -6,7 +6,7 @@
             android:name=".HomePageActivity"
             android:exported="false"
             android:label="@string/title_activity_home_page"
-            android:theme="@style/Theme.MyChat" />
+            android:theme="@style/Theme.HomePage" />
     </application>
 
 </manifest>
