@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="res_no_content">还没有和别人聊过天哟</string>
+    <string name="network_error">加载失败，请检查网络</string>
+    <string name="load_failed">加载失败</string>
+</resources>

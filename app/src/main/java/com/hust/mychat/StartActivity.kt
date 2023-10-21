@@ -3,6 +3,7 @@ package com.hust.mychat
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.hust.database.BaseApplication
 import com.hust.database.MMKVUtil
 import com.hust.homepage.HomePageActivity
 import com.hust.lar.LARActivity
@@ -19,6 +20,7 @@ class StartActivity : AppCompatActivity() {
         val mmkv = MMKVUtil.getMMKV(this)
         val isLogin = mmkv.getBoolean(Constant.IS_LOGIN)
         val `class` = if(isLogin) HomePageActivity::class.java else LARActivity::class.java
+        BaseApplication.currentUseId = mmkv.getInt(Constant.CURRENT_USER_ID) ?: -1
 
         // 设定定时跳转的任务
         val timer = Timer()

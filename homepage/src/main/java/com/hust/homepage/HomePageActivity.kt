@@ -1,10 +1,13 @@
 package com.hust.homepage
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -15,10 +18,12 @@ class HomePageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomePageBinding
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initView()
         backTwiceExit()
     }
@@ -37,8 +42,13 @@ class HomePageActivity : AppCompatActivity() {
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun initView() {
         setSupportActionBar(binding.homeScreenToolbar)
+
+        // 设置状态栏颜色
+        val windowController = WindowCompat.getInsetsController(window, window.decorView)
+        windowController.isAppearanceLightStatusBars = !resources.configuration.isNightModeActive
 
         val navView: BottomNavigationView = binding.navView
 
@@ -54,8 +64,5 @@ class HomePageActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        navView.itemIconTintList = null
-        navView.itemTextColor = null
     }
 }

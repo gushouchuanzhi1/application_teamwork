@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="title_activity_home_page">HomePageActivity</string>
     <string name="title_mychat">微信</string>
     <string name="title_address_book">通讯录</string>

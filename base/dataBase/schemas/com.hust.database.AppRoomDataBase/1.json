@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4771d1a475088951c8e788d8aad707ad",
+    "identityHash": "bba13d10e4a993183300616546b6920c",
     "entities": [
       {
         "tableName": "users",
@@ -41,12 +41,94 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "user_to_user",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`selfId` INTEGER NOT NULL, `friendId` INTEGER NOT NULL, `friendNickname` TEXT NOT NULL, `chatId` TEXT NOT NULL, PRIMARY KEY(`selfId`))",
+        "fields": [
+          {
+            "fieldPath": "selfId",
+            "columnName": "selfId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "friendId",
+            "columnName": "friendId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "friendNickname",
+            "columnName": "friendNickname",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chatId",
+            "columnName": "chatId",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "selfId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "chat_record",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`msgSeq` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ownerId` INTEGER NOT NULL, `chatId` TEXT NOT NULL, `content` TEXT, `createAt` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "msgSeq",
+            "columnName": "msgSeq",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ownerId",
+            "columnName": "ownerId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chatId",
+            "columnName": "chatId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "content",
+            "columnName": "content",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createAt",
+            "columnName": "createAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "msgSeq"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4771d1a475088951c8e788d8aad707ad')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bba13d10e4a993183300616546b6920c')"
     ]
   }
 }

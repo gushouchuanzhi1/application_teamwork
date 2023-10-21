@@ -8,6 +8,7 @@ plugins {
 ext {
     isRelease = true
     compose_version = "1.5.1"
+    okHttp_version = "4.9.3"
 }
 
 task clean(type: Delete) {

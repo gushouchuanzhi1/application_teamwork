@@ -6,10 +6,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hust.database.AppRoomDataBase
+import com.hust.database.BaseApplication
+import com.hust.database.MMKVUtil
 import com.hust.database.tables.User
+import com.hust.resbase.Constant
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class LARActivityViewModel : ViewModel() {
     var tip by mutableStateOf("")
@@ -37,12 +41,13 @@ class LARActivityViewModel : ViewModel() {
         return if(checkFormat(username, 1) and checkFormat(password, 2)) {
             try {
                 val deffer = scope.async {
-                    val user = appRoomDataBase.userDao().queryByLoginIn(username, password)
-                    user != null
+                    appRoomDataBase.userDao().queryByLoginIn(username, password)
                 }
-                val isExist = deffer.await()
-                if(!isExist) {tip = "该用户不存在！"}
-                isExist
+                val user = deffer.await()
+                if(user == null) {tip = "该用户不存在！"} else {
+                    MMKVUtil.getMMKV(BaseApplication.getContext()).put(Constant.CURRENT_USER_ID, user.id)
+                }
+                user != null
             }catch (e:Exception) {
                 e.printStackTrace()
                 tip = "数据库查询出错！"
