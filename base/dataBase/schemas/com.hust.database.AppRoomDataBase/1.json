@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "bba13d10e4a993183300616546b6920c",
+    "identityHash": "82949e2593172517868ae3256ccb81ae",
     "entities": [
       {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_name` TEXT NOT NULL, `password` TEXT NOT NULL, `createdAt` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_name` TEXT NOT NULL, `password` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `nickname` TEXT NOT NULL, `profilePicPath` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -31,6 +31,18 @@
             "columnName": "createdAt",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "nickname",
+            "columnName": "nickname",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profilePicPath",
+            "columnName": "profilePicPath",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -44,7 +56,7 @@
       },
       {
         "tableName": "user_to_user",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`selfId` INTEGER NOT NULL, `friendId` INTEGER NOT NULL, `friendNickname` TEXT NOT NULL, `chatId` TEXT NOT NULL, PRIMARY KEY(`selfId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`selfId` INTEGER NOT NULL, `friendNickname` TEXT NOT NULL, `friendProfilePicPath` TEXT NOT NULL, `chatId` TEXT NOT NULL, PRIMARY KEY(`selfId`))",
         "fields": [
           {
             "fieldPath": "selfId",
@@ -53,14 +65,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "friendId",
-            "columnName": "friendId",
-            "affinity": "INTEGER",
+            "fieldPath": "friendNickname",
+            "columnName": "friendNickname",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "friendNickname",
-            "columnName": "friendNickname",
+            "fieldPath": "friendProfilePicPath",
+            "columnName": "friendProfilePicPath",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -128,7 +140,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bba13d10e4a993183300616546b6920c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '82949e2593172517868ae3256ccb81ae')"
     ]
   }
 }

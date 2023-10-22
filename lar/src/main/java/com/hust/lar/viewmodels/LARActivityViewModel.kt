@@ -59,7 +59,7 @@ class LARActivityViewModel : ViewModel() {
         }
     }
 
-    suspend fun signUp(username: String, password: String): Boolean {
+    suspend fun signUp(username: String, password: String, nickname: String): Boolean {
         return if(checkFormat(username, 1) and checkFormat(password, 2)) {
             try {
                 val deffer = scope.async {
@@ -67,6 +67,7 @@ class LARActivityViewModel : ViewModel() {
                     user.userName = username
                     user.password = password
                     user.createdAt = System.currentTimeMillis()
+                    user.nickname = nickname
                     appRoomDataBase.userDao().insert(user)
                     appRoomDataBase.userDao().queryByLoginIn(username, password) != null
                 }

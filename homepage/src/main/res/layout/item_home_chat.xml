@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="chatUnit"
             type="com.hust.netbase.ChatUnit" />
@@ -13,7 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chatItem"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60">
+        android:layout_height="@dimen/dp_60"
+        android:background="@drawable/standard_item_background">
 
         <ImageView
             android:id="@+id/iv_profile_picture"
@@ -60,7 +60,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_20"
-                android:text="@{String.valueOf(chatUnit.message.createAt)}"
+                app:time="@{chatUnit.message.createAt}"
                 tools:text="09:54" />
 
             <View

@@ -15,4 +15,22 @@ class ChatRecord {
     var content: String? = null
 
     var createAt: Long = 0L
+
+    override fun equals(other: Any?): Boolean {
+        if(other is ChatRecord) {
+            return other.msgSeq == msgSeq && other.content == content
+                    && other.ownerId == ownerId && other.chatId == chatId
+                    && other.createAt == createAt
+        }
+        return false
+    }
+
+    override fun hashCode(): Int {
+        var result = msgSeq.hashCode()
+        result = 31 * result + ownerId
+        result = 31 * result + chatId.hashCode()
+        result = 31 * result + (content?.hashCode() ?: 0)
+        result = 31 * result + createAt.hashCode()
+        return result
+    }
 }

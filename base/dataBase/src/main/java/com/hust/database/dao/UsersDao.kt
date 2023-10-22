@@ -14,6 +14,9 @@ abstract class UsersDao {
     @Query("select * from users where user_name =:userName and password =:password")
     abstract fun queryByLoginIn(userName: String, password: String): User?
 
+    @Query("select * from users where user_name =:userName")
+    abstract fun queryByName(userName: String): User?
+
     @Query("select * from users")
     abstract fun queryAll(): List<User>
 

@@ -4,4 +4,5 @@
     <color name="HomePage_Background">@color/GrayScale_0</color>
     <color name="HomePage_Surface">@color/GrayScale_20</color>
     <color name="OnSurface">@color/Surface</color>
+    <color name="GrayScale_80">@color/GrayScale_20</color>
 </resources>

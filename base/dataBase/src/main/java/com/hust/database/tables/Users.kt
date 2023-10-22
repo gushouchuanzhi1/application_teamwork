@@ -15,4 +15,8 @@ class User {
     var password: String = ""
 
     var createdAt: Long = 0
+
+    var nickname: String = userName
+
+    var profilePicPath: String = ""
 }

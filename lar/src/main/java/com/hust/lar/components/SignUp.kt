@@ -63,6 +63,7 @@ import kotlinx.coroutines.withContext
 fun SignUp(navController: NavHostController) {
     var userName by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var nickname by remember { mutableStateOf("")}
     var passwordRepeat by remember { mutableStateOf("") }
     var btEnabled by remember { mutableStateOf(false) }
 
@@ -84,7 +85,7 @@ fun SignUp(navController: NavHostController) {
                 focusManager.clearFocus()
             }
     ) {
-        val (rTitle, rTip, rUserName, rPassword, rPasswordRepeat, rBt) = createRefs()
+        val (rTitle, rTip, rNickname, rUserName, rPassword, rPasswordRepeat, rBt) = createRefs()
 
         LaunchedEffect(viewModel.tip) {
             delay(TimeSpan.LONG)
@@ -120,13 +121,61 @@ fun SignUp(navController: NavHostController) {
         )
 
         TextField(
+            value = nickname,
+            onValueChange = { nickname = it },
+            modifier = Modifier
+                .constrainAs(rNickname) {
+                    top.linkTo(rTip.bottom)
+                    start.linkTo(rTip.start)
+                    end.linkTo(rTip.end)
+                }
+                .padding(top = 15.dp)
+                .focusRequester(focusRequester),
+            label = { Text(text = "昵称") },
+            placeholder = { Text(text = "请输入昵称", color = Color.LightGray) },
+            trailingIcon = {
+                AnimatedVisibility(
+                    visible = nickname.isNotEmpty(),
+                    enter = scaleIn(),
+                    exit = scaleOut()
+                ) {
+                    Image(
+                        imageVector = Icons.Filled.Clear,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .clickable {
+                                nickname = ""
+                            }
+                            .padding(start = 15.dp, end = 15.dp)
+                            .size(20.dp)
+                    )
+                }
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next
+            ),
+            shape = RoundedCornerShape(20.dp),
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = Color.Black,
+                containerColor = if (isSystemInDarkTheme()) Color.White else Color.Transparent,
+                cursorColor = Color.Black,
+                focusedIndicatorColor = if (isSystemInDarkTheme()) Color.Transparent else Color.Gray,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+                errorIndicatorColor = Color.Transparent
+            ),
+            singleLine = true
+        )
+
+        TextField(
             value = userName,
             onValueChange = { userName = it },
             modifier = Modifier
                 .constrainAs(rUserName) {
-                    top.linkTo(rTip.bottom)
-                    start.linkTo(rTip.start)
-                    end.linkTo(rTip.end)
+                    top.linkTo(rNickname.bottom)
+                    start.linkTo(rNickname.start)
+                    end.linkTo(rNickname.end)
                 }
                 .padding(top = 15.dp)
                 .focusRequester(focusRequester),
@@ -276,7 +325,7 @@ fun SignUp(navController: NavHostController) {
             ),
             keyboardActions = KeyboardActions(onDone = {
                 scope.launch {
-                    if(viewModel.signUp(userName, password)) {
+                    if(viewModel.signUp(userName, password, nickname)) {
                         withContext(Dispatchers.Main) {
                             navController.popBackStack()
                         }
@@ -306,7 +355,7 @@ fun SignUp(navController: NavHostController) {
                     viewModel.tip = "确认密码与第一次输入不符"
                 } else {
                     scope.launch {
-                        if(viewModel.signUp(userName, password)) {
+                        if(viewModel.signUp(userName, password, nickname)) {
                             withContext(Dispatchers.Main) {
                                 navController.popBackStack()
                             }

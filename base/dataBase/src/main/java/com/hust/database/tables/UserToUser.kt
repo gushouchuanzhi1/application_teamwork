@@ -8,9 +8,9 @@ class UserToUser {
     @PrimaryKey
     var selfId: Int = -1
 
-    var friendId: Int = -1
-
     var friendNickname: String = ""
+
+    var friendProfilePicPath: String = ""
 
     var chatId: String = ""
 }

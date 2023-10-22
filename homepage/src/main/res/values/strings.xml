@@ -4,4 +4,6 @@
     <string name="title_address_book">通讯录</string>
     <string name="title_find">发现</string>
     <string name="title_mine">我</string>
+    <string name="please_input_friend_id">请输入好友id</string>
+    <string name="add">添加</string>
 </resources>

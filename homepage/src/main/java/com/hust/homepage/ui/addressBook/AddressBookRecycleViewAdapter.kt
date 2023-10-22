@@ -1,22 +1,29 @@
-package com.hust.homepage.ui.home
+package com.hust.homepage.ui.addressBook
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hust.homepage.databinding.ItemAddressBookBinding
 import com.hust.homepage.databinding.ItemHomeChatBinding
+import com.hust.homepage.ui.home.HomeRecycleViewAdapter
 import com.hust.netbase.ChatUnit
 
-class HomeRecycleViewAdapter(
+class AddressBookRecycleViewAdapter(
 
-) : ListAdapter<ChatUnit, HomeRecycleViewAdapter.ChatUnitViewHolder>(DiffCallback) {
+) : ListAdapter<ChatUnit, AddressBookRecycleViewAdapter.ChatUnitViewHolder>(DiffCallback) {
     inner class ChatUnitViewHolder(
-        private val binding: ItemHomeChatBinding
+        private val binding: ItemAddressBookBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(chatUnit: ChatUnit) {
+        fun bind(chatUnit: ChatUnit, label: String?) {
             binding.chatUnit = chatUnit
-            binding.chatItem.setOnClickListener {
+            binding.label = label
+            label?.let {
+                binding.addressLabel.visibility = View.GONE
+            }
+            binding.addressBookItem.setOnClickListener {
 
             }
         }
@@ -24,7 +31,7 @@ class HomeRecycleViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatUnitViewHolder {
         return ChatUnitViewHolder(
-            ItemHomeChatBinding.inflate(
+            ItemAddressBookBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -34,7 +41,12 @@ class HomeRecycleViewAdapter(
 
     override fun onBindViewHolder(holder: ChatUnitViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        val label = when (position) {
+            5 -> "企业微信"
+            7 -> "联系人"
+            else -> ""
+        }
+        holder.bind(item, label)
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<ChatUnit>() {
@@ -43,7 +55,7 @@ class HomeRecycleViewAdapter(
         }
 
         override fun areContentsTheSame(oldItem: ChatUnit, newItem: ChatUnit): Boolean {
-            return oldItem.message.msgSeq == newItem.message.msgSeq
+            return oldItem == newItem
         }
     }
 }

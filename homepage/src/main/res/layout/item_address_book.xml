@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="chatUnit"
+            type="com.hust.netbase.ChatUnit" />
+
+        <variable
+            name="label"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:textSize="@dimen/sp_11"
+            android:text="@{label}"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/address_book_item"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:background="@color/Surface">
+
+            <ImageView
+                android:id="@+id/iv_pro_pic"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginStart="@dimen/dp_10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_mychat"
+                tools:src="@drawable/ic_mychat" />
+
+            <TextView
+                android:id="@+id/address_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:text="@{chatUnit.nickname}"
+                android:textAppearance="@style/HustTypography.Body2"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_pro_pic"
+                app:layout_constraintStart_toEndOf="@+id/iv_pro_pic"
+                app:layout_constraintTop_toTopOf="@+id/iv_pro_pic"
+                tools:text="亲爱哒" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/dp_60"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>

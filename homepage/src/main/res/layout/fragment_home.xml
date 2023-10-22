@@ -61,6 +61,11 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_home_chat" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:background="@color/HomePage_Background" />
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
