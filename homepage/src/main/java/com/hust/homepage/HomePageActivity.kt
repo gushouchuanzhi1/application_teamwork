@@ -119,8 +119,7 @@ class HomePageActivity : AppCompatActivity() {
 
             val etUserId = view.findViewById<EditText>(R.id.et_user_id)
             val btSearch = view.findViewById<Button>(R.id.bt_search_user)
-            var isEnabled: Boolean
-
+            var isEnabled = false
             etUserId.addTextChangedListener {
                 isEnabled = it?.isNotEmpty() ?: false
                 btSearch.isEnabled = isEnabled

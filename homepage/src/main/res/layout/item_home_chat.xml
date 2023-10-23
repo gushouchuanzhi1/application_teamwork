@@ -12,14 +12,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chatItem"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/dp_80"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingStart="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
         android:background="@drawable/standard_item_background">
 
         <ImageView
             android:id="@+id/iv_profile_picture"
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_40"
-            android:layout_marginStart="@dimen/dp_10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +41,6 @@
                 android:id="@+id/nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
                 android:text="@{chatUnit.nickname}"
                 android:textAppearance="@style/HustTypography.Body2"
                 tools:text="宝贝" />
@@ -58,8 +59,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginEnd="@dimen/dp_20"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:textSize="@dimen/sp_10"
                 app:time="@{chatUnit.message.createAt}"
                 tools:text="09:54" />
 

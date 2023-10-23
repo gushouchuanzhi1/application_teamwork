@@ -34,4 +34,9 @@
     <color name="HomePage_Surface">@color/Surface</color>
 
     <color name="Mychat_Green">#FF95ec69</color>
+    <color name="Divider_Background">@color/GrayScale_95</color>
+    <color name="Item_selected_Background">@color/GrayScale_95</color>
+    <color name="Address_unselect_Background">@color/GrayScale_95</color>
+    <color name="PopUpWindow_Background">@color/GrayScale_80</color>
+    <color name="item_find_surface">@color/GrayScale_100</color>
 </resources>

@@ -18,5 +18,5 @@ class User {
 
     var nickname: String = userName
 
-    var profilePicPath: String = ""
+    var profilePicPath: Int = -1
 }

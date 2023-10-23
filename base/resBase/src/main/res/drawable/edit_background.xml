@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 内部颜色 -->
     <solid
-        android:color="@color/Background" android:state_pressed="false"/>
+        android:color="@color/HomePage_Background" android:state_pressed="false"/>
 
 
     <!-- 边缘线条颜色 -->

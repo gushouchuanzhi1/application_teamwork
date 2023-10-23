@@ -76,7 +76,7 @@ class HomeRepository(
         friends?.let {
             it.forEach { friend ->
                 val oneRecord = appRoomDataBase.chatRecordDao().queryOneRecord(friend.chatId)
-                chatList.add(ChatUnit(-1, "", friend.friendNickname, oneRecord))
+                chatList.add(ChatUnit(-1, friend.friendProfilePicPath, friend.friendNickname, oneRecord))
             }
         }
         emit(ApiResult.Success(data = chatList))

@@ -9,7 +9,12 @@ data class ChatMessage(
 
 data class ChatUnit(
     val use_id: Int,
-    val profilePicPath: String,
+    val profilePicPath: Int,
     val nickname: String,
     val message: ChatRecord
+)
+
+data class FindUnit(
+    val title: String,
+    val profilePicPath: Int
 )

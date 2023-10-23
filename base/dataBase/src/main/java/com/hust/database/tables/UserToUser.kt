@@ -10,7 +10,7 @@ class UserToUser {
 
     var friendNickname: String = ""
 
-    var friendProfilePicPath: String = ""
+    var friendProfilePicPath: Int = -1
 
     var chatId: String = ""
 }

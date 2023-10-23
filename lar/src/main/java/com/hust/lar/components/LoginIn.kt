@@ -103,6 +103,7 @@ fun LoginIn(navController: NavHostController = rememberNavController(), jump: ()
         Text(
             text = "登录MyChat",
             modifier = Modifier.padding(top = 160.dp),
+            color = MaterialTheme.colorScheme.surface,
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.Cursive,
@@ -263,7 +264,7 @@ fun LoginIn(navController: NavHostController = rememberNavController(), jump: ()
             enabled = btEnabled,
             shape = RoundedCornerShape(20.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(R.color.teal_200),
+                containerColor = Color.Green,
                 disabledContainerColor = Color.Gray
             )
         ) {

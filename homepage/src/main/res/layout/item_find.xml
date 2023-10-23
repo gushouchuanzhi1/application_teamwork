@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="findUnit"
+            type="com.hust.netbase.FindUnit" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_find_background"
+        android:padding="@dimen/dp_10">
+
+        <ImageView
+            android:id="@+id/iv_find_icon"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_find" />
+
+        <TextView
+            android:id="@+id/tv_find_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:text="@{findUnit.title}"
+            android:textAppearance="@style/HustTypography.Body2"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_find_icon"
+            app:layout_constraintStart_toEndOf="@+id/iv_find_icon"
+            app:layout_constraintTop_toTopOf="@+id/iv_find_icon"
+            tools:text="朋友圈" />
+
+        <ImageView
+            android:id="@+id/iv_find_go"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_go" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

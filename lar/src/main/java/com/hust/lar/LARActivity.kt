@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -14,9 +16,22 @@ import com.hust.database.MMKVUtil
 import com.hust.homepage.HomePageActivity
 import com.hust.lar.components.Main
 import com.hust.lar.ui.theme.MyChatTheme
+import com.hust.lar.viewmodels.LARActivityViewModel
 import com.hust.resbase.Constant
 
 class LARActivity : ComponentActivity() {
+    private val viewModel: LARActivityViewModel by viewModels()
+
+    val requestDataLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val uri = result.data?.data
+                uri?.let {
+                    viewModel.createCopyAndReturnRealPath(this, it)
+                }
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -36,13 +51,15 @@ class LARActivity : ComponentActivity() {
                 }
             }
         }
+
         var lastPressedTime = 0L
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if(lastPressedTime + 2000L > System.currentTimeMillis()) {
+                if (lastPressedTime + 2000L > System.currentTimeMillis()) {
                     finish()
-                }else {
-                    Toast.makeText(this@LARActivity, "请再按一次退出", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@LARActivity, "请再按一次退出", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 lastPressedTime = System.currentTimeMillis()
             }

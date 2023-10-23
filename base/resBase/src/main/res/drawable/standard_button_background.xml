@@ -6,6 +6,8 @@
                 android:color="@color/Mychat_Green"/>
             <stroke
                 android:color="@color/Mychat_Green"/>
+            <corners
+                android:radius="@dimen/dp_20"/>
         </shape>
     </item>
 
@@ -15,6 +17,8 @@
                 android:color="@color/GrayScale_80"/>
             <stroke
                 android:color="@color/GrayScale_80"/>
+            <corners
+                android:radius="@dimen/dp_20"/>
         </shape>
     </item>
 </selector>

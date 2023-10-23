@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/dp_20"
-    android:background="@color/GrayScale_98">
+    android:background="@color/PopUpWindow_Background">
 
     <EditText
         android:id="@+id/et_user_id"
@@ -29,6 +29,7 @@
         android:layout_marginTop="@dimen/dp_40"
         android:background="@drawable/standard_button_background"
         android:text="@string/add"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="@id/et_user_id"
         app:layout_constraintStart_toStartOf="@id/et_user_id"
         app:layout_constraintTop_toBottomOf="@id/et_user_id" />

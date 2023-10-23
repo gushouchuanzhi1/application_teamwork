@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "82949e2593172517868ae3256ccb81ae",
+    "identityHash": "509f72f1ec73f76113bcec0b7f0a8d38",
     "entities": [
       {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_name` TEXT NOT NULL, `password` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `nickname` TEXT NOT NULL, `profilePicPath` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_name` TEXT NOT NULL, `password` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `nickname` TEXT NOT NULL, `profilePicPath` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -41,7 +41,7 @@
           {
             "fieldPath": "profilePicPath",
             "columnName": "profilePicPath",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -56,7 +56,7 @@
       },
       {
         "tableName": "user_to_user",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`selfId` INTEGER NOT NULL, `friendNickname` TEXT NOT NULL, `friendProfilePicPath` TEXT NOT NULL, `chatId` TEXT NOT NULL, PRIMARY KEY(`selfId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`selfId` INTEGER NOT NULL, `friendNickname` TEXT NOT NULL, `friendProfilePicPath` INTEGER NOT NULL, `chatId` TEXT NOT NULL, PRIMARY KEY(`selfId`))",
         "fields": [
           {
             "fieldPath": "selfId",
@@ -73,7 +73,7 @@
           {
             "fieldPath": "friendProfilePicPath",
             "columnName": "friendProfilePicPath",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -140,7 +140,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '82949e2593172517868ae3256ccb81ae')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '509f72f1ec73f76113bcec0b7f0a8d38')"
     ]
   }
 }

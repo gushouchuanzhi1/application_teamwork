@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hust.database.tables.ChatRecord
+import com.hust.homepage.R
 import com.hust.netbase.ChatUnit
 import com.hust.resbase.ApiResult
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,13 +15,13 @@ import kotlinx.coroutines.launch
 class AddressBookFragmentViewModel : ViewModel() {
     private val repository = AddressBookRepository()
     private val _addressBookList = MutableStateFlow(listOf(
-        ChatUnit(-1, "", "新的朋友", ChatRecord()),
-        ChatUnit(-1, "", "仅聊天的朋友", ChatRecord()),
-        ChatUnit(-1, "", "群聊", ChatRecord()),
-        ChatUnit(-1, "", "标签", ChatRecord()),
-        ChatUnit(-1, "", "公众号", ChatRecord()),
-        ChatUnit(-1, "", "企业微信联系人", ChatRecord()),
-        ChatUnit(-1, "", "华中科技大学", ChatRecord())
+        ChatUnit(-1, R.drawable.ic_new_friend, "新的朋友", ChatRecord()),
+        ChatUnit(-1, R.drawable.ic_chat_only, "仅聊天的朋友", ChatRecord()),
+        ChatUnit(-1, R.drawable.ic_chat_group, "群聊", ChatRecord()),
+        ChatUnit(-1, R.drawable.ic_chat_sign, "标签", ChatRecord()),
+        ChatUnit(-1, R.drawable.ic_chat_public, "公众号", ChatRecord()),
+        ChatUnit(-1, -1, "企业微信联系人", ChatRecord()),
+        ChatUnit(-1, -1, "华中科技大学", ChatRecord())
     ))
 
     val addressBookList = _addressBookList.asStateFlow()
