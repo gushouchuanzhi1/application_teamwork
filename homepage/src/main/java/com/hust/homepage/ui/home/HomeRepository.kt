@@ -3,7 +3,6 @@ package com.hust.homepage.ui.home
 import androidx.lifecycle.MutableLiveData
 import com.hust.database.AppRoomDataBase
 import com.hust.database.BaseApplication
-import com.hust.database.tables.ChatRecord
 import com.hust.netbase.ChatListApiService
 import com.hust.netbase.ChatUnit
 import com.hust.resbase.ApiResult
@@ -26,7 +25,7 @@ class HomeRepository(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
     private val appRoomDataBase: AppRoomDataBase = AppRoomDataBase.get()
     private var offset = 0
-    var tip = MutableLiveData("")
+    var tip = MutableLiveData<String?>()
 
     fun getChatList(sortMode: String): Flow<ApiResult> = flow {
         emit(ApiResult.Loading())

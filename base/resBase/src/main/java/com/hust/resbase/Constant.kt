@@ -4,6 +4,8 @@ object Constant {
     const val IS_LOGIN = "isLogin"
     const val LOGIN_TOKEN = "login_token"
     const val CURRENT_USER_ID = "current_user_id"
+    const val CURRENT_USER_NICKNAME = "current_user_name"
+    const val CURRENT_USER_PICPATH = "current_user_pic_path"
 }
 
 object RouteConfig {
@@ -31,6 +33,12 @@ object NetworkConstant {
         const val ASC = "ASC"
     }
     const val CONSTANT_STANDARD_LOAD_SIZE = 20
+}
+
+object ArouterConfig {
+    const val ACTIVITY_START = "/app/StartActivity"
+    const val ACTIVITY_LAR = "/lar/LARActivity"
+    const val ACTIVITY_HOME = "/homepage/HomePageActivity"
 }
 
 enum class PlaceholderType {

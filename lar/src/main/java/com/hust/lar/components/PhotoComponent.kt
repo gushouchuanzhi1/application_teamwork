@@ -49,7 +49,6 @@ class PhotoComponent {
 
     /**
      * @param galleryCallback 相册结果回调
-     * @param graphCallback 拍照结果回调
      * @param permissionRationale 权限拒绝状态回调
      **/
     @OptIn(ExperimentalPermissionsApi::class, ExperimentalPermissionsApi::class)

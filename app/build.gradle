@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -17,6 +18,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
+        }
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
         }
     }
 
@@ -49,8 +55,13 @@ android {
 dependencies {
     implementation project(':base:dataBase')
     implementation project(':base:resBase')
+
     implementation project(':lar')
     implementation project(':homepage')
+
+    // Arouter
+    implementation "com.alibaba:arouter-api:$ARouter_version"
+    kapt "com.alibaba:arouter-compiler:$ARouter_version"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'

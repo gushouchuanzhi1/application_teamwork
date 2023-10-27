@@ -2,18 +2,12 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "509f72f1ec73f76113bcec0b7f0a8d38",
+    "identityHash": "0eef5f321a69102460ebdad77e2212ab",
     "entities": [
       {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_name` TEXT NOT NULL, `password` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `nickname` TEXT NOT NULL, `profilePicPath` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_name` TEXT NOT NULL, `password` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `nickname` TEXT NOT NULL, `profilePicPath` TEXT NOT NULL, `id` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "userName",
             "columnName": "user_name",
@@ -41,6 +35,12 @@
           {
             "fieldPath": "profilePicPath",
             "columnName": "profilePicPath",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -49,14 +49,14 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "user_to_user",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`selfId` INTEGER NOT NULL, `friendNickname` TEXT NOT NULL, `friendProfilePicPath` INTEGER NOT NULL, `chatId` TEXT NOT NULL, PRIMARY KEY(`selfId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`selfId` INTEGER NOT NULL, `friendNickname` TEXT NOT NULL, `friendProfilePicPath` TEXT NOT NULL, `chatId` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
             "fieldPath": "selfId",
@@ -73,7 +73,7 @@
           {
             "fieldPath": "friendProfilePicPath",
             "columnName": "friendProfilePicPath",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -81,27 +81,27 @@
             "columnName": "chatId",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "selfId"
+            "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "chat_record",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`msgSeq` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ownerId` INTEGER NOT NULL, `chatId` TEXT NOT NULL, `content` TEXT, `createAt` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ownerId` INTEGER NOT NULL, `chatId` TEXT NOT NULL, `content` TEXT, `createAt` INTEGER NOT NULL, `msgSeq` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
-          {
-            "fieldPath": "msgSeq",
-            "columnName": "msgSeq",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "ownerId",
             "columnName": "ownerId",
@@ -125,6 +125,12 @@
             "columnName": "createAt",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "msgSeq",
+            "columnName": "msgSeq",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -140,7 +146,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '509f72f1ec73f76113bcec0b7f0a8d38')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0eef5f321a69102460ebdad77e2212ab')"
     ]
   }
 }

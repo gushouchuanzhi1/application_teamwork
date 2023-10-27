@@ -18,22 +18,27 @@ import androidx.asynclayoutinflater.view.AsyncLayoutInflater
 import androidx.core.view.WindowCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
+import com.hust.database.BaseApplication
+import com.hust.database.MMKVUtil
 import com.hust.homepage.databinding.ActivityHomePageBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.hust.resbase.ArouterConfig
+import com.hust.resbase.Constant
+import com.hust.resbase.OnFunctionCallBack
 
+@Route(path = ArouterConfig.ACTIVITY_HOME)
 class HomePageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomePageBinding
     private val viewModel: HomePageActivityViewModel by viewModels()
     private val lifecycleOwner: LifecycleOwner = this
+    private lateinit var navController: NavController
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +46,7 @@ class HomePageActivity : AppCompatActivity() {
         binding = ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initData()
         initView()
         backTwiceExit()
     }
@@ -60,6 +66,13 @@ class HomePageActivity : AppCompatActivity() {
         })
     }
 
+    private fun initData() {
+        ARouter.getInstance().inject(this)
+        BaseApplication.currentUseId = MMKVUtil.getMMKV(this).getInt(Constant.CURRENT_USER_ID) ?: -1
+        BaseApplication.currentUseNickname = MMKVUtil.getMMKV(this).getString(Constant.CURRENT_USER_NICKNAME) ?: ""
+        BaseApplication.currentUsePicPath = MMKVUtil.getMMKV(this).getString(Constant.CURRENT_USER_PICPATH) ?: ""
+    }
+
     @RequiresApi(Build.VERSION_CODES.R)
     private fun initView() {
         setSupportActionBar(binding.homeScreenToolbar)
@@ -70,7 +83,7 @@ class HomePageActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_home_page)
+        navController = findNavController(R.id.nav_host_fragment_activity_home_page)
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -131,33 +144,26 @@ class HomePageActivity : AppCompatActivity() {
             etUserId.setOnEditorActionListener { v, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     val text = v.text.toString()
-                    CoroutineScope(Dispatchers.IO).launch {
-                        if (viewModel.searchAndAddFriend(text)) {
+                    viewModel.searchAndAddFriend(text, object : OnFunctionCallBack {
+                        override fun onSuccess() {
+                            ppwSearch.dismiss()
                             viewModel.tip.value = "添加成功！"
-                            withContext(Dispatchers.Main) {
-                                ppwSearch.dismiss()
-                            }
-                        } else {
-                            viewModel.tip.value = "该用户不存在"
+                            viewModel.isRefresh.value = true
                         }
-                    }
+                    })
                 }
                 false
             }
             btSearch.setOnClickListener {
                 val text = etUserId.text.toString()
                 etUserId.text.clear()
-                CoroutineScope(Dispatchers.IO).launch {
-                    val isSuccess = viewModel.searchAndAddFriend(text)
-                    withContext(Dispatchers.Main) {
-                        if (isSuccess) {
-                            viewModel.tip.value = "添加成功！"
-                            ppwSearch.dismiss()
-                        } else {
-                            viewModel.tip.value = "该用户不存在"
-                        }
+                viewModel.searchAndAddFriend(text, object : OnFunctionCallBack {
+                    override fun onSuccess() {
+                        ppwSearch.dismiss()
+                        viewModel.tip.value = "添加成功！"
+                        viewModel.isRefresh.value = true
                     }
-                }
+                })
             }
         }
     }

@@ -1,7 +1,7 @@
 package com.hust.lar.components
 
 import android.net.Uri
-import androidx.activity.compose.rememberLauncherForActivityResult
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.scaleIn
@@ -44,7 +44,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -60,7 +59,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
 import com.google.accompanist.placeholder.material.shimmer
@@ -95,7 +93,7 @@ fun SignUp(navController: NavHostController) {
     val context = LocalContext.current
 
 
-    btEnabled = userName.isNotEmpty() and password.isNotEmpty() and passwordRepeat.isNotEmpty()
+    btEnabled = userName.isNotEmpty() and password.isNotEmpty() and passwordRepeat.isNotEmpty() and (localImgPath != Uri.EMPTY)
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
@@ -145,11 +143,13 @@ fun SignUp(navController: NavHostController) {
             mediaAction.Register(
                 galleryCallback = {
                     if (it.isSuccess) {
-                        localImgPath = it.uri
+                        it.uri?.let { uri ->
+                            localImgPath = viewModel.createCopyAndReturnRealPath(context, uri)
+                        }
                     }
                 },
                 permissionRationale = {
-                    //权限拒绝的处理
+                    Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
                 }
             )
         }
@@ -388,7 +388,7 @@ fun SignUp(navController: NavHostController) {
             ),
             keyboardActions = KeyboardActions(onDone = {
                 scope.launch {
-                    if(viewModel.signUp(userName, password, nickname)) {
+                    if(viewModel.signUp(userName, password, nickname, localImgPath)) {
                         withContext(Dispatchers.Main) {
                             navController.popBackStack()
                         }
@@ -418,7 +418,7 @@ fun SignUp(navController: NavHostController) {
                     viewModel.tip = "确认密码与第一次输入不符"
                 } else {
                     scope.launch {
-                        if(viewModel.signUp(userName, password, nickname)) {
+                        if(viewModel.signUp(userName, password, nickname, localImgPath)) {
                             withContext(Dispatchers.Main) {
                                 navController.popBackStack()
                             }

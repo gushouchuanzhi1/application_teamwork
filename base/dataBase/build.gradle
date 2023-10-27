@@ -1,9 +1,15 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
-apply plugin: 'kotlin-kapt'//kotlin开启katpt
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+    generateStubs = true
+}
 android {
     namespace 'com.hust.database'
     compileSdk 33
@@ -20,7 +26,8 @@ android {
                 arguments += [
                         "room.schemaLocation":"$projectDir/schemas".toString(),
                         "room.incremental":"true",
-                        "room.expandProjection":"true"]
+                        "room.expandProjection":"true"
+                ]
             }
         }
     }
@@ -50,6 +57,9 @@ dependencies {
     implementation "androidx.room:room-runtime:2.4.2"
     implementation "androidx.room:room-ktx:2.4.2"
     kapt "androidx.room:room-compiler:2.4.2"
+    // Arouter
+    implementation "com.alibaba:arouter-api:$ARouter_version"
+    kapt "com.alibaba:arouter-compiler:$ARouter_version"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'

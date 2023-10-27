@@ -6,34 +6,23 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.hust.database.MMKVUtil
-import com.hust.homepage.HomePageActivity
 import com.hust.lar.components.Main
 import com.hust.lar.ui.theme.MyChatTheme
-import com.hust.lar.viewmodels.LARActivityViewModel
+import com.hust.resbase.ArouterConfig
 import com.hust.resbase.Constant
 
+@Route(path = ArouterConfig.ACTIVITY_LAR)
 class LARActivity : ComponentActivity() {
-    private val viewModel: LARActivityViewModel by viewModels()
-
-    val requestDataLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val uri = result.data?.data
-                uri?.let {
-                    viewModel.createCopyAndReturnRealPath(this, it)
-                }
-            }
-        }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ARouter.getInstance().inject(this)
         setContent {
             MyChatTheme {
                 // A surface container using the 'background' color from the theme
@@ -44,8 +33,7 @@ class LARActivity : ComponentActivity() {
                     Main() {
                         val mmkv = MMKVUtil.getMMKV(this)
                         mmkv.put(Constant.IS_LOGIN, true)
-                        val intent = Intent(this, HomePageActivity::class.java)
-                        startActivity(intent)
+                        ARouter.getInstance().build(ArouterConfig.ACTIVITY_HOME).navigation()
                         finish()
                     }
                 }

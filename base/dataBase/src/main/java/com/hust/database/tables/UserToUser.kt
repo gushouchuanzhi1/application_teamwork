@@ -4,13 +4,15 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "user_to_user")
-class UserToUser {
-    @PrimaryKey
-    var selfId: Int = -1
+data class UserToUser (
+    var selfId: Int,
 
-    var friendNickname: String = ""
+    var friendNickname: String,
 
-    var friendProfilePicPath: Int = -1
+    var friendProfilePicPath: String,
 
-    var chatId: String = ""
+    var chatId: String
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
 }

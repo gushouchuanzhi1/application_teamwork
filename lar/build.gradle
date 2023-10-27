@@ -1,11 +1,7 @@
 plugins {
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-}
-
-if (isRelease) {
-    apply plugin: 'com.android.library'
-} else {
-    apply plugin: 'com.android.application'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -13,18 +9,18 @@ android {
     compileSdk 33
 
     defaultConfig {
-        if (!isRelease) {
-            applicationId "com.hust.lar"
-        }
-
         minSdk 28
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
         vectorDrawables {
             useSupportLibrary true
+        }
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
         }
     }
 
@@ -58,7 +54,6 @@ android {
 dependencies {
     implementation project(':base:dataBase')
     implementation project(':base:resBase')
-    implementation project(':homepage')
 
     //用于compose权限的使用
     implementation("com.google.accompanist:accompanist-permissions:0.31.0-alpha")
@@ -87,7 +82,7 @@ dependencies {
     // room
     implementation "androidx.room:room-runtime:2.4.2"
     implementation "androidx.room:room-ktx:2.4.2"
-    annotationProcessor "androidx.room:room-compiler:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
@@ -96,6 +91,9 @@ dependencies {
 
     // compose navigation
     implementation "androidx.navigation:navigation-compose:2.4.0-beta02"
+    // Arouter
+    implementation "com.alibaba:arouter-api:$ARouter_version"
+    kapt "com.alibaba:arouter-compiler:$ARouter_version"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

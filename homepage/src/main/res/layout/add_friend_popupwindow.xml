@@ -14,7 +14,7 @@
         android:background="@drawable/edit_background"
         android:hint="@string/please_input_friend_id"
         android:imeOptions="actionDone"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:maxLength="20"
         android:paddingStart="@dimen/dp_8"
         android:textSize="@dimen/sp_14"

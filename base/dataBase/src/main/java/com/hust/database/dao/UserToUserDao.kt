@@ -14,6 +14,9 @@ abstract class UserToUserDao {
     @Query("select * from user_to_user where selfId=:who")
     abstract fun queryFriends(who: Int): List<UserToUser>?
 
+    @Query("select * from user_to_user where selfId=:a and friendNickname=:b")
+    abstract fun hasFriend(a: Int, b: String): UserToUser?
+
     @Query("select * from user_to_user")
     abstract fun queryAll(): List<UserToUser>?
 }

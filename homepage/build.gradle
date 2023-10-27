@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
 }
+
 android {
     namespace 'com.hust.homepage'
     compileSdk 33
@@ -15,6 +16,11 @@ android {
         consumerProguardFiles "consumer-rules.pro"
         vectorDrawables {
             useSupportLibrary true
+        }
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
         }
     }
 
@@ -48,6 +54,7 @@ dependencies {
     implementation project(':base:dataBase')
     implementation project(':base:resBase')
     implementation project(':base:netBase')
+    implementation project(':chat')
 
     // Retrofit with Moshi Converter
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
@@ -61,6 +68,12 @@ dependencies {
     implementation "androidx.room:room-ktx:2.4.2"
     implementation 'androidx.asynclayoutinflater:asynclayoutinflater:1.0.0'
     annotationProcessor "androidx.room:room-compiler:2.4.2"
+    // QRCode
+    implementation 'com.google.zxing:core:3.3.0'
+
+    // Arouter
+    implementation "com.alibaba:arouter-api:$ARouter_version"
+    kapt "com.alibaba:arouter-compiler:$ARouter_version"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'

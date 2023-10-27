@@ -1,5 +1,6 @@
 package com.hust.homepage.ui.addressBook
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ class AddressBookRecycleViewAdapter(
         fun bind(chatUnit: ChatUnit, label: String?) {
             binding.chatUnit = chatUnit
             binding.label = label
+            binding.ivProPic.setImageURI(Uri.parse(chatUnit.profilePicPath) ?: Uri.parse("android.resource://com.hust.mychat/drawable/ic_mychat"))
             label?.let {
                 binding.addressLabel.visibility = View.GONE
             }

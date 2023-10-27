@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.hust.homepage.HomePageActivityViewModel
 import com.hust.homepage.databinding.FragmentAddressBookBinding
-import com.hust.homepage.ui.SpaceItemDecoration
+import com.hust.resbase.SpaceItemDecoration
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -22,6 +24,8 @@ class AddressBookFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: AddressBookFragmentViewModel by viewModels()
+
+    private val parentViewModel: HomePageActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,13 +42,17 @@ class AddressBookFragment : Fragment() {
     }
 
     override fun onResume() {
-        viewModel.getLocalAddressList()
+        initData()
         super.onResume()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initData() {
+        viewModel.getLocalAddressList()
     }
 
     private fun initView() {
@@ -58,13 +66,17 @@ class AddressBookFragment : Fragment() {
                     parent: RecyclerView,
                     state: RecyclerView.State
                 ) {
-                    val layoutManager: LinearLayoutManager = parent.layoutManager as LinearLayoutManager
+                    val layoutManager: LinearLayoutManager =
+                        parent.layoutManager as LinearLayoutManager
                     if (layoutManager.orientation == LinearLayoutManager.VERTICAL) {
                         //最后一项需要 bottom
                         if (parent.getChildAdapterPosition(view) == layoutManager.itemCount - 1) {
                             outRect.bottom = topBottom
                         }
-                        if(parent.getChildAdapterPosition(view) == 5 || parent.getChildAdapterPosition(view) == 7) {
+                        if (parent.getChildAdapterPosition(view) == 5 || parent.getChildAdapterPosition(
+                                view
+                            ) == 7
+                        ) {
                             outRect.top = topBottom + 15
                         } else {
                             outRect.top = topBottom
@@ -86,10 +98,19 @@ class AddressBookFragment : Fragment() {
         viewModel.apply {
             tip.observe(viewLifecycleOwner) {
                 it?.let {
-                    Toast.makeText(this@AddressBookFragment.requireContext(), it, Toast.LENGTH_SHORT)
-                        .show()
-                    doneShowingTip()
+                    if (it.isNotEmpty()) {
+                        Toast.makeText(
+                            this@AddressBookFragment.requireContext(),
+                            it,
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                        doneShowingTip()
+                    }
                 }
+            }
+            parentViewModel.isRefresh.observe(viewLifecycleOwner) {
+                initData()
             }
         }
 

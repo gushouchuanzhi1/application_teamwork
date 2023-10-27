@@ -11,10 +11,10 @@ abstract class ChatRecordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insert(record: ChatRecord)
 
-    @Query("select * from chat_record where chatId=:chatId")
+    @Query("select * from chat_record where chatId=:chatId order by msgSeq")
     abstract fun queryRecord(chatId: String): List<ChatRecord>
 
-    @Query("select * from chat_record where chatId=:chatId limit 1")
+    @Query("select * from chat_record where chatId=:chatId order by msgSeq desc limit 1")
     abstract fun queryOneRecord(chatId: String): ChatRecord
     // 慎用
     @Query("select * from chat_record")

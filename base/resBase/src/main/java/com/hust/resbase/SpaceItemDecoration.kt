@@ -1,4 +1,4 @@
-package com.hust.homepage.ui
+package com.hust.resbase
 
 import android.graphics.Rect
 import android.view.View

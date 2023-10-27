@@ -2,56 +2,71 @@ package com.hust.homepage
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.hust.database.AppRoomDataBase
 import com.hust.database.BaseApplication
 import com.hust.database.tables.ChatRecord
 import com.hust.database.tables.User
 import com.hust.database.tables.UserToUser
+import com.hust.resbase.OnFunctionCallBack
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.security.SecureRandom
 
 class HomePageActivityViewModel : ViewModel() {
     private val appRoomDataBase: AppRoomDataBase = AppRoomDataBase.get()
     private val scope = CoroutineScope(Dispatchers.IO)
-    var tip = MutableLiveData("")
+    var tip = MutableLiveData<String?>()
+    val isRefresh = MutableLiveData<Boolean>()
 
-    suspend fun searchAndAddFriend(friendName: String): Boolean {
+    fun searchAndAddFriend(friendName: String, onCallBack: OnFunctionCallBack) {
         var user: User? = null
-        val deffer = scope.async {
+        scope.launch {
             try {
                 user = appRoomDataBase.userDao().queryByName(friendName)
             }catch (e: Exception) {
                 e.printStackTrace()
                 tip.value = e.message
-                return@async false
             }
             user?.let {
-                val userToUser = UserToUser()
-                userToUser.selfId = BaseApplication.currentUseId
-                userToUser.friendNickname = it.nickname
-                userToUser.friendProfilePicPath = it.profilePicPath
-                userToUser.chatId = generateChatId()
-                val chatRecord = ChatRecord()
-                chatRecord.chatId = userToUser.chatId
-                chatRecord.content = "你好呀"
-                chatRecord.createAt = System.currentTimeMillis()
-                chatRecord.ownerId = it.id
-                try {
-                    appRoomDataBase.userToUserDao().insert(userToUser)
-                    appRoomDataBase.chatRecordDao().insert(chatRecord)
-                    return@async true
-                }catch (e: Exception) {
-                    e.printStackTrace()
-                    tip.value = e.message
-                    return@async false
+                if(appRoomDataBase.userToUserDao().hasFriend(BaseApplication.currentUseId, it.nickname) == null) {
+                    val chatId = generateChatId()
+                    val self = UserToUser(
+                        selfId = BaseApplication.currentUseId,
+                        friendNickname = it.nickname,
+                        friendProfilePicPath = it.profilePicPath,
+                        chatId = chatId
+                    )
+                    val chatRecord = ChatRecord(
+                        chatId = self.chatId,
+                        content = "你好呀",
+                        createAt = System.currentTimeMillis(),
+                        ownerId = it.id
+                    )
+                    try {
+                        appRoomDataBase.userToUserDao().insert(self)
+                        if(it.id != BaseApplication.currentUseId) {
+                            val friend = UserToUser(
+                                selfId = it.id,
+                                friendNickname = BaseApplication.currentUseNickname,
+                                friendProfilePicPath = BaseApplication.currentUsePicPath,
+                                chatId = chatId
+                            )
+                            appRoomDataBase.userToUserDao().insert(friend)
+                        }
+
+                        appRoomDataBase.chatRecordDao().insert(chatRecord)
+                    }catch (e: Exception) {
+                        e.printStackTrace()
+                        tip.value = e.message
+                    }
+                    withContext(Dispatchers.Main) {
+                        onCallBack.onSuccess()
+                    }
                 }
             }
-            false
         }
-        return deffer.await()
     }
 
     fun doneShowingTip() {
@@ -66,6 +81,4 @@ class HomePageActivityViewModel : ViewModel() {
             .map { charPool[random.nextInt(charPool.size)] }
             .joinToString("")
     }
-
-
 }

@@ -24,7 +24,7 @@ class AddressBookRepository {
         val friends = appRoomDataBase.userToUserDao().queryFriends(BaseApplication.currentUseId)
         val addressList = mutableListOf<ChatUnit>()
         friends?.forEach { friend ->
-            addressList.add(ChatUnit(-1, friend.friendProfilePicPath, friend.friendNickname, ChatRecord()))
+            addressList.add(ChatUnit(-1, friend.friendProfilePicPath, friend.friendNickname, ChatRecord(0, "", "", 0L)))
         }
         emit(ApiResult.Success(data = addressList))
     }.flowOn(dispatcher).catch {

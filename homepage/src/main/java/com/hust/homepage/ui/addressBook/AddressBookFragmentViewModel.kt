@@ -15,13 +15,13 @@ import kotlinx.coroutines.launch
 class AddressBookFragmentViewModel : ViewModel() {
     private val repository = AddressBookRepository()
     private val _addressBookList = MutableStateFlow(listOf(
-        ChatUnit(-1, R.drawable.ic_new_friend, "新的朋友", ChatRecord()),
-        ChatUnit(-1, R.drawable.ic_chat_only, "仅聊天的朋友", ChatRecord()),
-        ChatUnit(-1, R.drawable.ic_chat_group, "群聊", ChatRecord()),
-        ChatUnit(-1, R.drawable.ic_chat_sign, "标签", ChatRecord()),
-        ChatUnit(-1, R.drawable.ic_chat_public, "公众号", ChatRecord()),
-        ChatUnit(-1, -1, "企业微信联系人", ChatRecord()),
-        ChatUnit(-1, -1, "华中科技大学", ChatRecord())
+        ChatUnit(0, "android.resource://com.hust.mychat/drawable/ic_new_friend", "新的朋友", ChatRecord(0, "", "", 0L)),
+        ChatUnit(1, "android.resource://com.hust.mychat/drawable/ic_chat_only", "仅聊天的朋友", ChatRecord(0, "", "", 0L)),
+        ChatUnit(2, "android.resource://com.hust.mychat/drawable/ic_chat_group", "群聊", ChatRecord(0, "", "", 0L)),
+        ChatUnit(3, "android.resource://com.hust.mychat/drawable/ic_chat_sign", "标签", ChatRecord(0, "", "", 0L)),
+        ChatUnit(4, "android.resource://com.hust.mychat/drawable/ic_chat_public", "公众号", ChatRecord(0, "", "", 0L)),
+        ChatUnit(5, "-1", "企业微信联系人", ChatRecord(0, "", "", 0L)),
+        ChatUnit(6, "-1", "华中科技大学", ChatRecord(0, "", "", 0L))
     ))
 
     val addressBookList = _addressBookList.asStateFlow()
