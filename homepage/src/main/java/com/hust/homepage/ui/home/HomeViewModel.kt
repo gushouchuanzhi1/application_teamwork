@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hust.database.BaseApplication
-import com.hust.database.tables.ChatRecord
 import com.hust.netbase.ChatListApiService
 import com.hust.netbase.ChatUnit
 import com.hust.netbase.MyChatApi
@@ -14,7 +13,6 @@ import com.hust.resbase.ApiStatus
 import com.hust.resbase.NetworkConstant
 import com.hust.resbase.PlaceholderType
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 

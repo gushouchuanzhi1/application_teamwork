@@ -6,7 +6,7 @@ import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 
 class BaseApplication : Application() {
-    private val isDebugARouter = true
+    private val isDebugARouter = false
     override fun onCreate() {
         super.onCreate()
         context = applicationContext

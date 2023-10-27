@@ -2,7 +2,6 @@ package com.hust.homepage.ui.addressBook
 
 import com.hust.database.AppRoomDataBase
 import com.hust.database.BaseApplication
-import com.hust.database.tables.ChatRecord
 import com.hust.netbase.ChatUnit
 import com.hust.resbase.ApiResult
 import kotlinx.coroutines.CoroutineDispatcher
@@ -24,7 +23,8 @@ class AddressBookRepository {
         val friends = appRoomDataBase.userToUserDao().queryFriends(BaseApplication.currentUseId)
         val addressList = mutableListOf<ChatUnit>()
         friends?.forEach { friend ->
-            addressList.add(ChatUnit(-1, friend.friendProfilePicPath, friend.friendNickname, ChatRecord(0, "", "", 0L)))
+            val oneRecord = appRoomDataBase.chatRecordDao().queryOneRecord(friend.chatId)
+            addressList.add(ChatUnit(-1, friend.friendProfilePicPath, friend.friendNickname, oneRecord))
         }
         emit(ApiResult.Success(data = addressList))
     }.flowOn(dispatcher).catch {

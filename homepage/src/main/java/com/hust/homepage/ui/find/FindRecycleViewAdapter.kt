@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hust.homepage.databinding.ItemFindBinding
-import com.hust.homepage.ui.mine.MineRecycleViewAdapter
 import com.hust.netbase.FindUnit
 
 class FindRecycleViewAdapter  : ListAdapter<FindUnit, FindRecycleViewAdapter.FindUnitViewHolder>(DiffCallback) {

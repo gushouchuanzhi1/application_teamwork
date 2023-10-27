@@ -6,7 +6,6 @@
     <data>
 
     </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,26 +18,26 @@
             android:background="@color/HomePage_Background"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="parent"
+            android:layout_marginBottom="@dimen/dp_55"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layout_send_bottom_bar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_send_bottom_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:background="@color/Surface"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <EditText
                 android:id="@+id/et_reply_post"
                 android:layout_width="@dimen/dp_235"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dp_42"
                 android:layout_marginVertical="@dimen/dp_12"
                 android:layout_marginStart="@dimen/dp_20"
                 android:background="@drawable/searchbar"
@@ -48,7 +47,6 @@
                 android:inputType="textMultiLine"
                 android:maxLength="200"
                 android:maxLines="5"
-                android:minHeight="@dimen/dp_36"
                 android:paddingVertical="@dimen/dp_7"
                 android:paddingStart="@dimen/dp_10"
                 android:textAppearance="@style/HustTypography.Body2"

@@ -2,15 +2,9 @@ package com.hust.homepage.ui.find
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hust.database.AppRoomDataBase
-import com.hust.database.BaseApplication
-import com.hust.database.tables.User
 import com.hust.netbase.FindUnit
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 class FindFragmentViewModel : ViewModel() {
     val tip = MutableLiveData<String>()

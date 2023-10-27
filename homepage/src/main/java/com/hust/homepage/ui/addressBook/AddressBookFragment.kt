@@ -1,5 +1,6 @@
 package com.hust.homepage.ui.addressBook
 
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,8 +13,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.hust.chat.ChatActivity
 import com.hust.homepage.HomePageActivityViewModel
 import com.hust.homepage.databinding.FragmentAddressBookBinding
+import com.hust.netbase.ChatUnit
 import com.hust.resbase.SpaceItemDecoration
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -57,6 +60,17 @@ class AddressBookFragment : Fragment() {
 
     private fun initView() {
         val adapter = AddressBookRecycleViewAdapter()
+        adapter.setOnItemClickListener(object : AddressBookRecycleViewAdapter.OnItemClickListener {
+            override fun onClick(view: View, position: Int, data: ChatUnit) {
+                if(position < 7) {
+                    viewModel.tip.value = "功能还在开发中"
+                }else {
+                    val intent = Intent(this@AddressBookFragment.requireContext(), ChatActivity::class.java)
+                    intent.putExtra("chatUnit", data)
+                    this@AddressBookFragment.requireContext().startActivity(intent)
+                }
+            }
+        })
         binding.rvAddressBookList.apply {
             this.adapter = adapter
             this.addItemDecoration(object : SpaceItemDecoration(0, 0) {

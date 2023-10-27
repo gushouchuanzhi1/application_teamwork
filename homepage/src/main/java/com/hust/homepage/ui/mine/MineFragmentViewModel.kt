@@ -41,12 +41,12 @@ class MineFragmentViewModel : ViewModel() {
     var tip = MutableLiveData<String?>()
 
     private val _mineList = MutableStateFlow(listOf(
-        FindUnit("服务", ""),
-        FindUnit("收藏", ""),
-        FindUnit("朋友圈", ""),
-        FindUnit("卡包", ""),
-        FindUnit("分享", ""),
-        FindUnit("退出", "")
+        FindUnit("服务", "android.resource://com.hust.mychat/drawable/ic_service"),
+        FindUnit("收藏", "android.resource://com.hust.mychat/drawable/ic_star"),
+        FindUnit("朋友圈", "android.resource://com.hust.mychat/drawable/ic_find_friend"),
+        FindUnit("卡包", "android.resource://com.hust.mychat/drawable/ic_card_packet"),
+        FindUnit("分享", "android.resource://com.hust.mychat/drawable/ic_share"),
+        FindUnit("退出", "android.resource://com.hust.mychat/drawable/ic_exit")
     ))
 
     val mineList = _mineList.asStateFlow()

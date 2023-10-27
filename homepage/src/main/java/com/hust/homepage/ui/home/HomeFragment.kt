@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import com.hust.chat.ChatActivity
 import com.hust.homepage.HomePageActivityViewModel
 import com.hust.homepage.databinding.FragmentHomeBinding
-import com.hust.homepage.ui.find.FindRecycleViewAdapter
 import com.hust.netbase.ChatUnit
 import com.hust.resbase.PlaceholderType
 import com.scwang.smart.refresh.footer.ClassicsFooter

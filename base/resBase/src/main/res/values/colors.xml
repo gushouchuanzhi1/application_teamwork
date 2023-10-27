@@ -44,4 +44,5 @@
     <color name="Address_unselect_Background">@color/GrayScale_95</color>
     <color name="PopUpWindow_Background">@color/GrayScale_80</color>
     <color name="item_find_surface">@color/GrayScale_100</color>
+    <color name="chat_content_background">@color/GrayScale_100</color>
 </resources>

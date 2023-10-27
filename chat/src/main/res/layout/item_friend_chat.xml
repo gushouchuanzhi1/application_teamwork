@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_20"
-            android:background="@color/Surface"
+            android:background="@drawable/friend_text_background"
             android:padding="@dimen/dp_10"
             android:text="@{chatRecord.content}"
             app:layout_constraintStart_toEndOf="@+id/friend_cardView"

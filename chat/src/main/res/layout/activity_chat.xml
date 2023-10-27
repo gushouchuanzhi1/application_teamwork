@@ -22,13 +22,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:titleTextAppearance="@style/HustTypography.Headline1.Bold"
             app:titleTextColor="@color/OnSurface"
-            tools:layout_height="@dimen/dp_60" >
+            tools:layout_height="@dimen/dp_60">
 
             <TextView
                 android:id="@+id/friend_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal" />
         </androidx.appcompat.widget.Toolbar>
 
         <fragment
@@ -36,8 +36,8 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:defaultNavHost="true"
             android:layout_marginTop="?attr/actionBarSize"
+            app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

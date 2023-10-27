@@ -8,15 +8,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hust.homepage.databinding.ItemAddressBookBinding
-import com.hust.homepage.databinding.ItemHomeChatBinding
-import com.hust.homepage.ui.home.HomeRecycleViewAdapter
 import com.hust.netbase.ChatUnit
 
 class AddressBookRecycleViewAdapter(
 
 ) : ListAdapter<ChatUnit, AddressBookRecycleViewAdapter.ChatUnitViewHolder>(DiffCallback) {
+    private lateinit var onItemClickListener: OnItemClickListener
     inner class ChatUnitViewHolder(
-        private val binding: ItemAddressBookBinding
+        val binding: ItemAddressBookBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(chatUnit: ChatUnit, label: String?) {
             binding.chatUnit = chatUnit
@@ -24,9 +23,6 @@ class AddressBookRecycleViewAdapter(
             binding.ivProPic.setImageURI(Uri.parse(chatUnit.profilePicPath) ?: Uri.parse("android.resource://com.hust.mychat/drawable/ic_mychat"))
             label?.let {
                 binding.addressLabel.visibility = View.GONE
-            }
-            binding.addressBookItem.setOnClickListener {
-
             }
         }
     }
@@ -49,6 +45,21 @@ class AddressBookRecycleViewAdapter(
             else -> ""
         }
         holder.bind(item, label)
+        onItemClickListener.let {
+            holder.binding.addressBookItem.apply {
+                setOnClickListener {
+                    onItemClickListener.onClick(it, position, item)
+                }
+            }
+        }
+    }
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener){
+        this.onItemClickListener = onItemClickListener
+    }
+
+    interface OnItemClickListener {
+        fun onClick(view: View, position: Int, data: ChatUnit)
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<ChatUnit>() {
