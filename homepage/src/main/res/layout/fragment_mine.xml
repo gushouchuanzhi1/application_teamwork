@@ -1,22 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.find.FindFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <data>
+
+        <variable
+            name="user"
+            type="com.hust.database.tables.User" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:background="@color/HomePage_Background">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_mine_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/item_find_surface"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_60"
+            android:paddingEnd="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_mine_profile_pic"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"
+                app:cardCornerRadius="@dimen/dp_20"
+                app:cardElevation="@dimen/dp_0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_mine_profile_pic"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_80"
+                    android:scaleType="centerCrop"/>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/tv_mine_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:text="@{user.nickname}"
+                android:textAppearance="@style/HustTypography.Body1"
+                app:layout_constraintStart_toEndOf="@+id/cv_mine_profile_pic"
+                app:layout_constraintTop_toTopOf="@+id/cv_mine_profile_pic"
+                tools:text="1001y" />
+
+            <TextView
+                android:id="@+id/tv_mine_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/dp_20"
+                android:text="@{@string/wechat_id(user.id)}"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="@+id/cv_mine_profile_pic"
+                app:layout_constraintStart_toEndOf="@+id/cv_mine_profile_pic"
+                tools:text="myChat号：yuruop" />
+
+            <ImageView
+                android:id="@+id/iv_mine_scan"
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_20"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_mine_scan_go"
+                app:layout_constraintEnd_toStartOf="@+id/iv_mine_scan_go"
+                app:srcCompat="@drawable/ic_mine_qrcode" />
+
+            <ImageView
+                android:id="@+id/iv_mine_scan_go"
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                app:layout_constraintBottom_toBottomOf="@+id/cv_mine_profile_pic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_go" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/dp_55"
+                android:layout_height="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
+                app:cardCornerRadius="@dimen/dp_10"
+                app:cardElevation="@dimen/dp_0"
+                app:layout_constraintStart_toStartOf="@+id/tv_mine_id"
+                app:layout_constraintTop_toBottomOf="@+id/tv_mine_id">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_15"
+                    android:layout_height="@dimen/dp_15"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_add" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/status"
+                    android:textSize="@dimen/sp_11" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_mine_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/HomePage_Background"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="@dimen/dp_15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_mine_profile"
+            tools:listitem="@layout/item_address_book" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

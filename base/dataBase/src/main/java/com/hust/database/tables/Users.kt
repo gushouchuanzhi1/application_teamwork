@@ -5,14 +5,18 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "users")
-class User {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = -1
-
+data class User (
     @ColumnInfo(name = "user_name")
-    var userName: String = ""
+    var userName: String,
 
-    var password: String = ""
+    var password: String,
 
-    var createdAt: Long = 0
+    var createdAt: Long,
+
+    var nickname: String,
+
+    var profilePicPath: String
+) {
+    @PrimaryKey
+    var id: Int = -1
 }

@@ -3,4 +3,13 @@
     <color name="Start_Background">@color/BlackScale_1</color>
     <color name="HomePage_Background">@color/GrayScale_0</color>
     <color name="HomePage_Surface">@color/GrayScale_20</color>
+    <color name="OnSurface">@color/GrayScale_100</color>
+    <color name="GrayScale_80">@color/GrayScale_20</color>
+    <color name="Surface">@color/GrayScale_0</color>
+    <color name="Divider_Background">@color/GrayScale_20</color>
+    <color name="Item_selected_Background">@color/GrayScale_20</color>
+    <color name="Address_unselect_Background">@color/GrayScale_20</color>
+    <color name="PopUpWindow_Background">@color/GrayScale_20</color>
+    <color name="item_find_surface">@color/BlackScale_1</color>
+    <color name="chat_content_background">@color/BlackScale_1</color>
 </resources>

@@ -33,5 +33,16 @@
     <color name="HomePage_Background">@color/Background</color>
     <color name="HomePage_Surface">@color/Surface</color>
 
-    <color name="Mychat_Green">#FF95ec69</color>
+    <color name="Mychat_Green">#DD95ec69</color>
+    <color name="HC_BandColor_1">#FF4B9F79</color>
+    <color name="HC_BandColor_2">#FFFDC27A</color>
+    <color name="HC_BandColor_3">#FF67C098</color>
+    <color name="HC_BandColor_5">#FF2D895F</color>
+    <color name="HC_Reminder_Warning">#FFFF6767</color>
+    <color name="Divider_Background">@color/GrayScale_95</color>
+    <color name="Item_selected_Background">@color/GrayScale_95</color>
+    <color name="Address_unselect_Background">@color/GrayScale_95</color>
+    <color name="PopUpWindow_Background">@color/GrayScale_80</color>
+    <color name="item_find_surface">@color/GrayScale_100</color>
+    <color name="chat_content_background">@color/GrayScale_100</color>
 </resources>
