@@ -12,10 +12,7 @@ import com.hust.database.BaseApplication
 import com.hust.database.tables.ChatRecord
 
 
-class SpecificChatRecycleViewAdapter(
-    private val friendPicPath: String
-) : ListAdapter<ChatRecord, RecyclerView.ViewHolder>(DiffCallback) {
-
+class SpecificChatRecycleViewAdapter: ListAdapter<ChatRecord, RecyclerView.ViewHolder>(DiffCallback) {
     inner class MyChatViewHolder(
         val binding: ItemMineChatBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -30,7 +27,7 @@ class SpecificChatRecycleViewAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(chatRecord: ChatRecord) {
             binding.chatRecord = chatRecord
-            binding.friendPic.setImageURI(Uri.parse(friendPicPath))
+            binding.friendPic.setImageURI(Uri.parse(BaseApplication.certainFriendPicPath))
         }
     }
 
@@ -77,7 +74,7 @@ class SpecificChatRecycleViewAdapter(
             }
 
             override fun areContentsTheSame(oldItem: ChatRecord, newItem: ChatRecord): Boolean {
-                return oldItem.content == newItem.content
+                return oldItem == newItem
             }
         }
 

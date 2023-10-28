@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.hust.chat.ChatActivity
+import com.hust.database.BaseApplication
 import com.hust.homepage.HomePageActivityViewModel
 import com.hust.homepage.databinding.FragmentHomeBinding
 import com.hust.netbase.ChatUnit
@@ -76,6 +77,7 @@ class HomeFragment : Fragment() {
             override fun onClick(view: View, position: Int, data: ChatUnit) {
                 val intent = Intent(this@HomeFragment.requireContext(), ChatActivity::class.java)
                 intent.putExtra("chatUnit", data)
+                BaseApplication.certainFriendPicPath = data.profilePicPath
                 this@HomeFragment.requireContext().startActivity(intent)
             }
         })

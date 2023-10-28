@@ -37,7 +37,7 @@ class SpecificChatFragment : Fragment() {
     }
 
     override fun onResume() {
-        viewModel.getChatList(parentViewModel.chatUnit?.message?.chatId ?: "")
+        viewModel.getChatList(parentViewModel.chatUnit.value?.message?.chatId ?: "")
         super.onResume()
     }
 
@@ -47,7 +47,7 @@ class SpecificChatFragment : Fragment() {
     }
 
     private fun initView() {
-        val adapter = SpecificChatRecycleViewAdapter(parentViewModel.chatUnit?.profilePicPath ?: "")
+        val adapter = SpecificChatRecycleViewAdapter()
         binding.rvChatList.adapter = adapter
         binding.rvChatList.addItemDecoration(SpaceItemDecoration(0, 0))
         lifecycleScope.launch {
@@ -59,7 +59,7 @@ class SpecificChatFragment : Fragment() {
             binding.btnSend.isEnabled = (it?.isNotEmpty() == true)
         }
         binding.btnSend.setOnClickListener {
-            viewModel.sendAMessage(binding.etReplyPost.text, parentViewModel.chatUnit?.message?.chatId ?: "")
+            viewModel.sendAMessage(binding.etReplyPost.text, parentViewModel.chatUnit.value?.message?.chatId ?: "")
         }
         viewModel.tip.observe(viewLifecycleOwner) {
             it?.let {
