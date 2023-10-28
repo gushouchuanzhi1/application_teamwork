@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="chatRecord"
             type="com.hust.database.tables.ChatRecord" />
@@ -12,10 +13,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/HomePage_Background"
         android:paddingVertical="@dimen/dp_20"
-        android:paddingStart="@dimen/dp_60"
-        android:paddingEnd="@dimen/dp_20"
-        android:background="@color/HomePage_Background">
+        android:paddingEnd="@dimen/dp_20">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/mine_cardView"
@@ -30,7 +30,7 @@
                 android:id="@+id/mine_pic"
                 android:layout_width="@dimen/dp_40"
                 android:layout_height="@dimen/dp_40"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop" />
 
         </androidx.cardview.widget.CardView>
 
@@ -39,13 +39,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_20"
-            android:padding="@dimen/dp_10"
             android:background="@drawable/mine_text_background"
-            android:textColor="@color/BlackScale_1"
+            android:maxWidth="@dimen/dp_200"
+            android:padding="@dimen/dp_10"
             android:text="@{chatRecord.content}"
+            android:textColor="@color/BlackScale_1"
             app:layout_constraintEnd_toStartOf="@+id/mine_cardView"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="hello" />
+            tools:text="hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

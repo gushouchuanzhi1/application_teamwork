@@ -1,8 +1,10 @@
 package com.hust.chat
 
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
@@ -12,7 +14,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.bumptech.glide.Glide
 import com.hust.chat.databinding.ActivityChatBinding
+import com.hust.database.BaseApplication
 import com.hust.database.KeyboardUtil
 import com.hust.netbase.ChatUnit
 

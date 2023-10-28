@@ -22,7 +22,7 @@ import java.io.OutputStream
 import kotlin.random.Random
 
 class LARActivityViewModel : ViewModel() {
-    var tip by mutableStateOf("")
+    var tip by mutableStateOf<String?>(null)
 
     private val appRoomDataBase: AppRoomDataBase = AppRoomDataBase.get()
     private val scope = CoroutineScope(Dispatchers.IO)
@@ -34,10 +34,12 @@ class LARActivityViewModel : ViewModel() {
                 val emailRegex = "^[A-Za-z0-9]+@[a-zA-Z0-9]+(.[a-zA-Z0-9]+)+$"
                 value.matches(Regex(emailRegex))
             }
+
             2 -> {
                 val validPasswordRegex = "^[a-zA-Z0-9]+$"
                 value.matches(Regex(validPasswordRegex))
             }
+
             else -> {
                 false
             }
@@ -45,55 +47,63 @@ class LARActivityViewModel : ViewModel() {
     }
 
     suspend fun loginIn(username: String, password: String): Boolean {
-        return if(checkFormat(username, 1) and checkFormat(password, 2)) {
+        return if (checkFormat(username, 1) and checkFormat(password, 2)) {
             try {
                 val deffer = scope.async {
                     appRoomDataBase.userDao().queryByLoginIn(username, password)
                 }
                 val user = deffer.await()
-                if(user == null) {tip = "该用户不存在！"} else {
-                    MMKVUtil.getMMKV(BaseApplication.getContext()).put(Constant.CURRENT_USER_ID, user.id)
-                    MMKVUtil.getMMKV(BaseApplication.getContext()).put(Constant.CURRENT_USER_NICKNAME, user.nickname)
-                    MMKVUtil.getMMKV(BaseApplication.getContext()).put(Constant.CURRENT_USER_PICPATH, user.profilePicPath)
+                if (user == null) {
+                    tip = "该用户不存在！"
+                } else {
+                    MMKVUtil.getMMKV(BaseApplication.getContext())
+                        .put(Constant.CURRENT_USER_ID, user.id)
+                    MMKVUtil.getMMKV(BaseApplication.getContext())
+                        .put(Constant.CURRENT_USER_NICKNAME, user.nickname)
+                    MMKVUtil.getMMKV(BaseApplication.getContext())
+                        .put(Constant.CURRENT_USER_PICPATH, user.profilePicPath)
                 }
                 user != null
-            }catch (e:Exception) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 tip = "数据库查询出错！"
                 false
             }
-        }else {
+        } else {
             tip = "邮箱或者密码格式错误！"
             false
         }
     }
 
     suspend fun signUp(username: String, password: String, nickname: String, uri: Uri): Boolean {
-        return if(checkFormat(username, 1) and checkFormat(password, 2)) {
+        return if (checkFormat(username, 1) and checkFormat(password, 2)) {
             try {
                 val deffer = scope.async {
-                    val user = User(
-                        userName = username,
-                        password = password,
-                        createdAt = System.currentTimeMillis(),
-                        nickname = nickname,
-                        profilePicPath = uri.toString()
-                    )
-                    user.id = Random(System.currentTimeMillis()).nextInt(Int.MAX_VALUE)
-                    appRoomDataBase.runInTransaction {
-                        appRoomDataBase.userDao().insert(user)
+                    if(appRoomDataBase.userDao().queryByName(username) == null) {
+                        val user = User(
+                            userName = username,
+                            password = password,
+                            createdAt = System.currentTimeMillis(),
+                            nickname = nickname,
+                            profilePicPath = uri.toString()
+                        )
+                        user.id = Random(System.currentTimeMillis()).nextInt(Int.MAX_VALUE)
+                        appRoomDataBase.runInTransaction {
+                            appRoomDataBase.userDao().insert(user)
+                        }
+                        appRoomDataBase.userDao().queryByLoginIn(username, password) != null
                     }
-                    appRoomDataBase.userDao().queryByLoginIn(username, password) != null
+                    false
                 }
                 val isExist = deffer.await()
-                if(!isExist) {tip = "注册失败"}
+                tip = if (isExist) "注册成功" else "注册失败"
                 isExist
-            }catch (e:Exception) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 tip = "数据库操作出错！"
                 false
             }
-        }else {
+        } else {
             tip = "邮箱或者密码格式错误！"
             false
         }

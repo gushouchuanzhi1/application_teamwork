@@ -109,7 +109,7 @@ fun LoginIn(navController: NavHostController = rememberNavController(), jump: ()
         )
 
         Text(
-            text = viewModel.tip,
+            text = viewModel.tip ?: "",
             modifier = Modifier.padding(top = 10.dp),
             color = Color.Red,
             fontSize = 12.sp
