@@ -53,7 +53,6 @@ enum class ApiStatus {
 }
 
 sealed class ApiResult {
-
     data class Success<T>(
         val status: ApiStatus = ApiStatus.SUCCESSFUL,
         var data: T? = null

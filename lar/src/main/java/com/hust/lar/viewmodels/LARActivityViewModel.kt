@@ -92,8 +92,9 @@ class LARActivityViewModel : ViewModel() {
                             appRoomDataBase.userDao().insert(user)
                         }
                         appRoomDataBase.userDao().queryByLoginIn(username, password) != null
+                    }else {
+                        false
                     }
-                    false
                 }
                 val isExist = deffer.await()
                 tip = if (isExist) "注册成功" else "注册失败"
