@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.hust.chat.databinding.ItemFriendChatBinding
 import com.hust.chat.databinding.ItemMineChatBinding
 import com.hust.database.BaseApplication
@@ -18,7 +19,7 @@ class SpecificChatRecycleViewAdapter: ListAdapter<ChatRecord, RecyclerView.ViewH
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(chatRecord: ChatRecord) {
             binding.chatRecord = chatRecord
-            binding.minePic.setImageURI(Uri.parse(BaseApplication.currentUsePicPath))
+            Glide.with(binding.root).load(Uri.parse(BaseApplication.currentUsePicPath)).into(binding.minePic)
         }
     }
 
@@ -27,7 +28,7 @@ class SpecificChatRecycleViewAdapter: ListAdapter<ChatRecord, RecyclerView.ViewH
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(chatRecord: ChatRecord) {
             binding.chatRecord = chatRecord
-            binding.friendPic.setImageURI(Uri.parse(BaseApplication.certainFriendPicPath))
+            Glide.with(binding.root).load(Uri.parse(BaseApplication.certainFriendPicPath)).into(binding.friendPic)
         }
     }
 
@@ -74,7 +75,7 @@ class SpecificChatRecycleViewAdapter: ListAdapter<ChatRecord, RecyclerView.ViewH
             }
 
             override fun areContentsTheSame(oldItem: ChatRecord, newItem: ChatRecord): Boolean {
-                return oldItem == newItem
+                return oldItem.content == newItem.content
             }
         }
 

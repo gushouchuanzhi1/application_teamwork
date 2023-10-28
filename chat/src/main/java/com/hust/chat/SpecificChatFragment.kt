@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.hust.chat.databinding.FragmentSpecificChatBinding
-import com.hust.resbase.SpaceItemDecoration
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -34,6 +33,7 @@ class SpecificChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initView()
+        initObservers()
     }
 
     override fun onResume() {
@@ -49,17 +49,21 @@ class SpecificChatFragment : Fragment() {
     private fun initView() {
         val adapter = SpecificChatRecycleViewAdapter()
         binding.rvChatList.adapter = adapter
-        binding.rvChatList.addItemDecoration(SpaceItemDecoration(0, 0))
         lifecycleScope.launch {
             viewModel.chatList.collectLatest {
                 adapter.submitList(it)
             }
         }
-        binding.etReplyPost.addTextChangedListener {
-            binding.btnSend.isEnabled = (it?.isNotEmpty() == true)
-        }
-        binding.btnSend.setOnClickListener {
-            viewModel.sendAMessage(binding.etReplyPost.text, parentViewModel.chatUnit.value?.message?.chatId ?: "")
+    }
+
+    private fun initObservers() {
+        binding.apply {
+            etReplyPost.addTextChangedListener {
+                btnSend.isEnabled = (it?.isNotEmpty() == true)
+            }
+            btnSend.setOnClickListener {
+                viewModel.sendAMessage(binding.etReplyPost.text, parentViewModel.chatUnit.value?.message?.chatId ?: "")
+            }
         }
         viewModel.tip.observe(viewLifecycleOwner) {
             it?.let {

@@ -42,7 +42,7 @@
                     android:id="@+id/iv_mine_profile_pic"
                     android:layout_width="@dimen/dp_80"
                     android:layout_height="@dimen/dp_80"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop" />
 
             </androidx.cardview.widget.CardView>
 
@@ -118,10 +118,10 @@
             android:id="@+id/rv_mine_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
             android:background="@color/HomePage_Background"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_marginTop="@dimen/dp_15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_mine_profile"

@@ -107,7 +107,10 @@ fun SignUp(navController: NavHostController) {
 
         LaunchedEffect(viewModel.tip) {
             delay(TimeSpan.LONG)
-            viewModel.tip = ""
+            if(!viewModel.tip.isNullOrEmpty()) {
+                Toast.makeText(context, viewModel.tip, Toast.LENGTH_SHORT).show()
+            }
+            viewModel.tip = null
         }
         Box(
             modifier = Modifier
@@ -170,7 +173,7 @@ fun SignUp(navController: NavHostController) {
         )
 
         Text(
-            text = viewModel.tip,
+            text = viewModel.tip ?: "",
             modifier = Modifier
                 .constrainAs(rTip) {
                     top.linkTo(rTitle.bottom)

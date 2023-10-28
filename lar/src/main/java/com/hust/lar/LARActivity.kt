@@ -24,21 +24,21 @@ class LARActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         ARouter.getInstance().inject(this)
         setContent {
-            MyChatTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background,
-                ) {
-                    Main() {
-                        val mmkv = MMKVUtil.getMMKV(this)
-                        mmkv.put(Constant.IS_LOGIN, true)
-                        ARouter.getInstance().build(ArouterConfig.ACTIVITY_HOME).navigation()
-                        finish()
+                MyChatTheme {
+                    // A surface container using the 'background' color from the theme
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background,
+                    ) {
+                        Main() {
+                            val mmkv = MMKVUtil.getMMKV(this)
+                            mmkv.put(Constant.IS_LOGIN, true)
+                            ARouter.getInstance().build(ArouterConfig.ACTIVITY_HOME).navigation()
+                            finish()
+                        }
                     }
                 }
             }
-        }
 
         var lastPressedTime = 0L
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
