@@ -9,5 +9,14 @@
         android:id="@+id/SpecificChatFragment"
         android:name="com.hust.chat.SpecificChatFragment"
         android:label=""
-        tools:layout="@layout/fragment_specific_chat"/>
+        tools:layout="@layout/fragment_specific_chat">
+        <argument
+            android:name="friendPicPath"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="chatId"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
 </navigation>

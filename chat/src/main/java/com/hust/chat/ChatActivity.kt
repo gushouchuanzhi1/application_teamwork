@@ -62,12 +62,12 @@ class ChatActivity : AppCompatActivity() {
     private fun initData() {
         val bundle = intent.extras
         bundle?.let {
-            viewModel.chatUnit = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            viewModel.chatUnit.value = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 it.getSerializable("chatUnit", ChatUnit::class.java)
             } else {
                 it.getSerializable("chatUnit") as ChatUnit
             }
         }
-        binding.friendNickname.text = viewModel.chatUnit?.nickname
+        binding.friendNickname.text = viewModel.chatUnit.value?.nickname
     }
 }

@@ -77,7 +77,7 @@ class HomeRepository(
                 val oneRecord = appRoomDataBase.chatRecordDao().queryOneRecord(friend.chatId)
                 chatList.add(
                     ChatUnit(
-                        -1,
+                        BaseApplication.currentUseId,
                         friend.friendProfilePicPath,
                         friend.friendNickname,
                         oneRecord

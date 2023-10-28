@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hust.chat.ChatActivity
+import com.hust.database.BaseApplication
 import com.hust.homepage.HomePageActivityViewModel
 import com.hust.homepage.databinding.FragmentAddressBookBinding
 import com.hust.netbase.ChatUnit
@@ -67,6 +68,7 @@ class AddressBookFragment : Fragment() {
                 }else {
                     val intent = Intent(this@AddressBookFragment.requireContext(), ChatActivity::class.java)
                     intent.putExtra("chatUnit", data)
+                    BaseApplication.certainFriendPicPath = data.profilePicPath
                     this@AddressBookFragment.requireContext().startActivity(intent)
                 }
             }

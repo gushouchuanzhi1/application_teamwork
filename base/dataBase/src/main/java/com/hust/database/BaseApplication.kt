@@ -31,6 +31,7 @@ class BaseApplication : Application() {
         var currentUseId: Int = -1
         var currentUsePicPath: String = ""
         var currentUseNickname: String = ""
+        var certainFriendPicPath: String = ""
         fun getContext(): Context {
             return context
         }
