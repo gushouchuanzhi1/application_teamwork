@@ -28,9 +28,14 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.hust.database.BaseApplication
 import com.hust.database.MMKVUtil
 import com.hust.homepage.databinding.ActivityHomePageBinding
+import com.hust.netbase.WebApiService
+import com.hust.netbase.WebPageRequest
 import com.hust.resbase.ArouterConfig
 import com.hust.resbase.Constant
 import com.hust.resbase.OnFunctionCallBack
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Route(path = ArouterConfig.ACTIVITY_HOME)
 class HomePageActivity : AppCompatActivity() {
@@ -71,6 +76,12 @@ class HomePageActivity : AppCompatActivity() {
         BaseApplication.currentUseId = MMKVUtil.getMMKV(this).getInt(Constant.CURRENT_USER_ID) ?: -1
         BaseApplication.currentUseNickname = MMKVUtil.getMMKV(this).getString(Constant.CURRENT_USER_NICKNAME) ?: ""
         BaseApplication.currentUsePicPath = MMKVUtil.getMMKV(this).getString(Constant.CURRENT_USER_PICPATH) ?: ""
+        try {
+            WebPageRequest.getHomepage()
+        }catch (e: Exception) {
+            e.printStackTrace()
+            print(e.message)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
