@@ -63,6 +63,11 @@ dependencies {
     implementation "com.alibaba:arouter-api:$ARouter_version"
     kapt "com.alibaba:arouter-compiler:$ARouter_version"
 
+    // room
+    implementation "androidx.room:room-runtime:2.4.2"
+    implementation "androidx.room:room-ktx:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')

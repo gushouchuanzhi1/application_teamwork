@@ -2,12 +2,18 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e38b67a393474282bfd23f9175a768df",
+    "identityHash": "78d0800030731fb767ca5857a54298ed",
     "entities": [
       {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_name` TEXT NOT NULL, `password` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `nickname` TEXT NOT NULL, `profilePicPath` TEXT NOT NULL, `id` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `user_name` TEXT NOT NULL, `password` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `nickname` TEXT NOT NULL, `profilePicPath` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
           {
             "fieldPath": "userName",
             "columnName": "user_name",
@@ -37,12 +43,6 @@
             "columnName": "profilePicPath",
             "affinity": "TEXT",
             "notNull": true
-          },
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -56,11 +56,17 @@
       },
       {
         "tableName": "user_to_user",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`selfId` INTEGER NOT NULL, `friendNickname` TEXT NOT NULL, `friendProfilePicPath` TEXT NOT NULL, `chatId` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`selfId` INTEGER NOT NULL, `friendId` INTEGER NOT NULL, `friendNickname` TEXT NOT NULL, `friendProfilePicPath` TEXT NOT NULL, `chatId` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
             "fieldPath": "selfId",
             "columnName": "selfId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "friendId",
+            "columnName": "friendId",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -202,12 +208,18 @@
       },
       {
         "tableName": "recommend_user_song",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `songId` TEXT NOT NULL, PRIMARY KEY(`userId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userId` INTEGER NOT NULL, `songId` TEXT NOT NULL, `createAt` INTEGER NOT NULL)",
         "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
           {
             "fieldPath": "userId",
             "columnName": "userId",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -215,13 +227,19 @@
             "columnName": "songId",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "createAt",
+            "columnName": "createAt",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "userId"
+            "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -230,7 +248,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e38b67a393474282bfd23f9175a768df')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '78d0800030731fb767ca5857a54298ed')"
     ]
   }
 }

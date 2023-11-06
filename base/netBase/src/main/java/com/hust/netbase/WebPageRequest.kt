@@ -39,7 +39,7 @@ object WebPageRequest {
         CoroutineScope(Dispatchers.IO).launch {
             val reader = InputStreamReader(input, Charset.forName("UTF-8"))
             val strategy: ColumnPositionMappingStrategy<Song> = ColumnPositionMappingStrategy()
-            strategy.setColumnMapping("name", "id", "label")
+            strategy.setColumnMapping("songId", "songName", "songGenres")
             strategy.type = Song::class.java
             val csvToBean = CsvToBeanBuilder<Song>(reader)
                 .withMappingStrategy(strategy)

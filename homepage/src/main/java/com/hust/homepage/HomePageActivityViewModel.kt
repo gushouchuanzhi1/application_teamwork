@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.hust.database.AppRoomDataBase
 import com.hust.database.BaseApplication
 import com.hust.database.tables.ChatRecord
+import com.hust.database.tables.RecommendUserSong
 import com.hust.database.tables.User
 import com.hust.database.tables.UserToUser
 import com.hust.netbase.PlayList
@@ -23,11 +24,13 @@ import java.security.SecureRandom
 class HomePageActivityViewModel : ViewModel() {
     private val appRoomDataBase: AppRoomDataBase = AppRoomDataBase.get()
     private val scope = CoroutineScope(Dispatchers.IO)
+
+
     var tip = MutableLiveData<String?>()
     val isRefresh = MutableLiveData<Boolean>()
-    val isInsert = MutableLiveData<Boolean>()
+    val isInsert = MutableLiveData(false)
 
-    fun searchAndAddFriend(friendName: String, onCallBack: OnFunctionCallBack) {
+    fun searchAndAddFriend(friendName: String, onCallBack: OnFunctionCallBack?) {
         var user: User? = null
         scope.launch {
             try {
@@ -41,6 +44,7 @@ class HomePageActivityViewModel : ViewModel() {
                     val chatId = generateChatId()
                     val self = UserToUser(
                         selfId = BaseApplication.currentUseId,
+                        friendId = it.id,
                         friendNickname = it.nickname,
                         friendProfilePicPath = it.profilePicPath,
                         chatId = chatId
@@ -56,6 +60,7 @@ class HomePageActivityViewModel : ViewModel() {
                         if(it.id != BaseApplication.currentUseId) {
                             val friend = UserToUser(
                                 selfId = it.id,
+                                friendId = BaseApplication.currentUseId,
                                 friendNickname = BaseApplication.currentUseNickname,
                                 friendProfilePicPath = BaseApplication.currentUsePicPath,
                                 chatId = chatId
@@ -69,7 +74,7 @@ class HomePageActivityViewModel : ViewModel() {
                         tip.value = e.message
                     }
                     withContext(Dispatchers.Main) {
-                        onCallBack.onSuccess()
+                        onCallBack?.onSuccess()
                     }
                 }
             }
@@ -108,10 +113,9 @@ class HomePageActivityViewModel : ViewModel() {
                     isInsert.value = true
                 }
                 appRoomDataBase.runInTransaction {
-                    list.forEach { song ->
-                        appRoomDataBase.songDao().insert((song as Song).asTableSong())
-                    }
+                    appRoomDataBase.songDao().insert(list.map { (it as Song).asTableSong() })
                 }
+
                 viewModelScope.launch {
                     tip.value = "SongList插入完成！"
                     isInsert.value = false
@@ -125,6 +129,23 @@ class HomePageActivityViewModel : ViewModel() {
             }
 
         })
+    }
+
+    fun initBaseFriend() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                searchAndAddFriend("John@qq.com", null)
+                searchAndAddFriend("Amy@qq.com", null)
+                appRoomDataBase.recommendDao().insert(
+                    RecommendUserSong(
+                        userId = BaseApplication.currentUseId,
+                        songId = "815267",
+                        createAt = System.currentTimeMillis()
+                    )
+                )
+            }
+            isRefresh.value = true
+        }
     }
 
     fun doneShowingTip() {

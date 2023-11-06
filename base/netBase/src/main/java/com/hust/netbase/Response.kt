@@ -1,6 +1,7 @@
 package com.hust.netbase
 
 import com.hust.database.tables.ChatRecord
+import com.hust.database.tables.RecommendUserSong
 import com.hust.database.tables.TablePlayList
 import com.hust.database.tables.TableSong
 import java.io.Serializable
@@ -46,3 +47,11 @@ data class Song(
         )
     }
 }
+
+data class UserLike(
+    val info: RecommendUserSong,
+    val nickname: String,
+    val profilePicPath: String,
+    val songName: String,
+    val isLike: Boolean = false
+)

@@ -28,6 +28,7 @@ class BaseApplication : Application() {
         @SuppressLint("StaticFieldLeak")
         private lateinit var context: Context
 
+        var currentUseName: String = ""
         var currentUseId: Int = -1
         var currentUsePicPath: String = ""
         var currentUseNickname: String = ""

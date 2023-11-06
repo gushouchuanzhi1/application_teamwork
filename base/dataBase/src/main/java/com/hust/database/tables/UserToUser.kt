@@ -7,6 +7,8 @@ import androidx.room.PrimaryKey
 data class UserToUser (
     var selfId: Int,
 
+    var friendId: Int,
+
     var friendNickname: String,
 
     var friendProfilePicPath: String,

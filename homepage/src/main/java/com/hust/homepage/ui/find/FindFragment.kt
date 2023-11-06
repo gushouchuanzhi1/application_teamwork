@@ -7,9 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavAction
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.hust.homepage.HomePageActivityViewModel
 import com.hust.homepage.databinding.FragmentFindBinding
 import com.hust.resbase.SpaceItemDecoration
 
@@ -19,6 +24,7 @@ class FindFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: FindFragmentViewModel by viewModels()
+    private val parentViewModel: HomePageActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,7 +82,16 @@ class FindFragment : Fragment() {
         })
         adapter.setOnItemClickListener(object : FindRecycleViewAdapter.OnItemClickListener {
             override fun onClick(view: View, position: Int) {
-                viewModel.tip.value = "功能还在开发中"
+                when (position) {
+                    0 -> {
+                        if(parentViewModel.isInsert.value == false) {
+                            findNavController().navigate(FindFragmentDirections.actionNavigationFindToFriendRecLikeFragment())
+                        }else {
+                            viewModel.tip.value = "请等待数据初始化完成..."
+                        }
+                    }
+                    else -> viewModel.tip.value = "功能还在开发中"
+                }
             }
         })
         viewModel.tip.observe(viewLifecycleOwner) {

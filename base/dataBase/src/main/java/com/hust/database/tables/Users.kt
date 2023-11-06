@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "users")
 data class User (
+    @PrimaryKey
+    var id: Int,
     @ColumnInfo(name = "user_name")
     var userName: String,
 
@@ -17,6 +19,5 @@ data class User (
 
     var profilePicPath: String
 ) {
-    @PrimaryKey
-    var id: Int = -1
+
 }

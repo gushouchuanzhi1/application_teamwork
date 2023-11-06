@@ -11,4 +11,7 @@
     <string name="mychat_mobile">MyChat移动版来啦！</string>
     <string name="puport">有时治愈 时常帮助 总是倾听</string>
     <string name="save_phone">保存到手机</string>
+    <string name="rec_song">我推荐了一首歌：%s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
