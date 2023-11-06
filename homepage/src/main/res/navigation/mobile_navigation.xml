@@ -21,11 +21,19 @@
         android:id="@+id/navigation_find"
         android:name="com.hust.homepage.ui.find.FindFragment"
         android:label="@string/title_find"
-        tools:layout="@layout/fragment_find" />
+        tools:layout="@layout/fragment_find" >
+        <action
+            android:id="@+id/action_navigation_find_to_friendRecLikeFragment"
+            app:destination="@id/friendRecLikeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_mine"
         android:name="com.hust.homepage.ui.mine.MineFragment"
         android:label="@string/title_mine"
         tools:layout="@layout/fragment_mine" />
+    <fragment
+        android:id="@+id/friendRecLikeFragment"
+        android:name="com.hust.homepage.ui.friend.FriendRecLikeFragment"
+        android:label="音乐世界" />
 </navigation>

@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity(tableName = "song")
-data class Song(
+data class TableSong(
     @PrimaryKey
-    val songId: String,
-    val songName: String,
-    val songGenres: String
+    var songId: String,
+    var songName: String,
+    var songGenres: String
 ) : Serializable

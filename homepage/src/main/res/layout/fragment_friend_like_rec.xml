@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_hole_star"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:background="@color/Surface"
+            app:tabIndicator="@drawable/tab_indicator"
+            app:tabIndicatorColor="@color/Mychat_Green"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabMode="scrollable"
+            app:tabPaddingEnd="@dimen/dp_0"
+            app:tabPaddingStart="@dimen/dp_0"
+            app:tabRippleColor="@color/transparent" />
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_hole_star"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tl_hole_star"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </RelativeLayout>
+</layout>

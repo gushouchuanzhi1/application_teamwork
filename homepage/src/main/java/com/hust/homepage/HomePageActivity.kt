@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.asynclayoutinflater.view.AsyncLayoutInflater
 import androidx.core.view.WindowCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
@@ -28,14 +29,9 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.hust.database.BaseApplication
 import com.hust.database.MMKVUtil
 import com.hust.homepage.databinding.ActivityHomePageBinding
-import com.hust.netbase.WebApiService
-import com.hust.netbase.WebPageRequest
 import com.hust.resbase.ArouterConfig
 import com.hust.resbase.Constant
 import com.hust.resbase.OnFunctionCallBack
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @Route(path = ArouterConfig.ACTIVITY_HOME)
 class HomePageActivity : AppCompatActivity() {
@@ -44,6 +40,12 @@ class HomePageActivity : AppCompatActivity() {
     private val viewModel: HomePageActivityViewModel by viewModels()
     private val lifecycleOwner: LifecycleOwner = this
     private lateinit var navController: NavController
+    private val fragmentList = listOf(
+        R.id.navigation_home,
+        R.id.navigation_address_book,
+        R.id.navigation_find,
+        R.id.navigation_mine
+    )
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,20 +75,29 @@ class HomePageActivity : AppCompatActivity() {
 
     private fun initData() {
         ARouter.getInstance().inject(this)
-        BaseApplication.currentUseId = MMKVUtil.getMMKV(this).getInt(Constant.CURRENT_USER_ID) ?: -1
-        BaseApplication.currentUseNickname = MMKVUtil.getMMKV(this).getString(Constant.CURRENT_USER_NICKNAME) ?: ""
-        BaseApplication.currentUsePicPath = MMKVUtil.getMMKV(this).getString(Constant.CURRENT_USER_PICPATH) ?: ""
-        try {
-            WebPageRequest.getHomepage()
-        }catch (e: Exception) {
-            e.printStackTrace()
-            print(e.message)
+        MMKVUtil.getMMKV(this).let {
+            BaseApplication.currentUseId = it.getInt(Constant.CURRENT_USER_ID) ?: -1
+            BaseApplication.currentUseNickname = it.getString(Constant.CURRENT_USER_NICKNAME) ?: ""
+            BaseApplication.currentUsePicPath = it.getString(Constant.CURRENT_USER_PICPATH) ?: ""
+            if(!it.getBoolean(Constant.IS_NEED_UPDATE)) {
+                viewModel.initPlayListData(resources.assets.open("playList.csv"))
+                viewModel.initSongListData(resources.assets.open("songList.csv"))
+                it.put(Constant.IS_NEED_UPDATE, true)
+            }
+            if(!it.getBoolean(Constant.IS_FIRST_LOGIN)) {
+                viewModel.initBaseFriend()
+                it.put(Constant.IS_FIRST_LOGIN, true)
+            }
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
     private fun initView() {
         setSupportActionBar(binding.homeScreenToolbar)
+
+        binding.homeScreenToolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         // 设置状态栏颜色
         val windowController = WindowCompat.getInsetsController(window, window.decorView)
@@ -117,6 +128,10 @@ class HomePageActivity : AppCompatActivity() {
 
         binding.ivAdd.setOnClickListener {
             createPopUpWindow()
+        }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.navView.isVisible = fragmentList.any { it == destination.id }
         }
     }
 

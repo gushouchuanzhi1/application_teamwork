@@ -81,13 +81,13 @@ class LARActivityViewModel : ViewModel() {
                 val deffer = scope.async {
                     if(appRoomDataBase.userDao().queryByName(username) == null) {
                         val user = User(
+                            id = Random(System.currentTimeMillis()).nextInt(Int.MAX_VALUE),
                             userName = username,
                             password = password,
                             createdAt = System.currentTimeMillis(),
                             nickname = nickname,
                             profilePicPath = uri.toString()
                         )
-                        user.id = Random(System.currentTimeMillis()).nextInt(Int.MAX_VALUE)
                         appRoomDataBase.runInTransaction {
                             appRoomDataBase.userDao().insert(user)
                         }

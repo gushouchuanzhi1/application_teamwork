@@ -1,11 +1,13 @@
 package com.hust.resbase
 
 object Constant {
+    const val IS_FIRST_LOGIN = "isFirstLogin"
     const val IS_LOGIN = "isLogin"
     const val LOGIN_TOKEN = "login_token"
     const val CURRENT_USER_ID = "current_user_id"
     const val CURRENT_USER_NICKNAME = "current_user_name"
     const val CURRENT_USER_PICPATH = "current_user_pic_path"
+    const val IS_NEED_UPDATE = "need_update"
 }
 
 object RouteConfig {

@@ -19,6 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/HomePage_Background"
             app:layout_constraintTop_toTopOf="parent"
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:titleTextAppearance="@style/HustTypography.Headline1.Bold"
             app:titleTextColor="@color/OnSurface"
             tools:layout_height="@dimen/dp_60" >
