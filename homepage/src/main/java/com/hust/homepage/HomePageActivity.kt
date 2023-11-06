@@ -76,12 +76,9 @@ class HomePageActivity : AppCompatActivity() {
         BaseApplication.currentUseId = MMKVUtil.getMMKV(this).getInt(Constant.CURRENT_USER_ID) ?: -1
         BaseApplication.currentUseNickname = MMKVUtil.getMMKV(this).getString(Constant.CURRENT_USER_NICKNAME) ?: ""
         BaseApplication.currentUsePicPath = MMKVUtil.getMMKV(this).getString(Constant.CURRENT_USER_PICPATH) ?: ""
-        try {
-            WebPageRequest.getHomepage()
-        }catch (e: Exception) {
-            e.printStackTrace()
-            print(e.message)
-        }
+
+        viewModel.initPlayListData(resources.assets.open("playList.csv"))
+        viewModel.initSongListData(resources.assets.open("songList.csv"))
     }
 
     @RequiresApi(Build.VERSION_CODES.R)

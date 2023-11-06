@@ -2,16 +2,22 @@ package com.hust.homepage
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.hust.database.AppRoomDataBase
 import com.hust.database.BaseApplication
 import com.hust.database.tables.ChatRecord
 import com.hust.database.tables.User
 import com.hust.database.tables.UserToUser
+import com.hust.netbase.PlayList
+import com.hust.netbase.Song
+import com.hust.netbase.WebPageRequest
+import com.hust.resbase.OnFileReadCallback
 import com.hust.resbase.OnFunctionCallBack
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.InputStream
 import java.security.SecureRandom
 
 class HomePageActivityViewModel : ViewModel() {
@@ -19,6 +25,7 @@ class HomePageActivityViewModel : ViewModel() {
     private val scope = CoroutineScope(Dispatchers.IO)
     var tip = MutableLiveData<String?>()
     val isRefresh = MutableLiveData<Boolean>()
+    val isInsert = MutableLiveData<Boolean>()
 
     fun searchAndAddFriend(friendName: String, onCallBack: OnFunctionCallBack) {
         var user: User? = null
@@ -67,6 +74,57 @@ class HomePageActivityViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+    fun initPlayListData(input: InputStream) {
+        WebPageRequest.getPlayList(input, object : OnFileReadCallback {
+            override fun onSuccess(list: List<*>) {
+                viewModelScope.launch {
+                    isInsert.value = true
+                }
+                appRoomDataBase.runInTransaction {
+                    list.forEach { playList ->
+                        appRoomDataBase.playListDao().insert((playList as PlayList).asTablePlayList())
+                    }
+                }
+                viewModelScope.launch {
+                    tip.value = "PlayList插入完成！"
+                    isInsert.value = false
+                }
+            }
+
+            override fun onFailure(msg: CharSequence) {
+                viewModelScope.launch {
+                    tip.value = msg.toString()
+                }
+            }
+        })
+    }
+
+    fun initSongListData(input: InputStream) {
+        WebPageRequest.getSongList(input, object : OnFileReadCallback {
+            override fun onSuccess(list: List<*>) {
+                viewModelScope.launch {
+                    isInsert.value = true
+                }
+                appRoomDataBase.runInTransaction {
+                    list.forEach { song ->
+                        appRoomDataBase.songDao().insert((song as Song).asTableSong())
+                    }
+                }
+                viewModelScope.launch {
+                    tip.value = "SongList插入完成！"
+                    isInsert.value = false
+                }
+            }
+
+            override fun onFailure(msg: CharSequence) {
+                viewModelScope.launch {
+                    tip.value = msg.toString()
+                }
+            }
+
+        })
     }
 
     fun doneShowingTip() {
